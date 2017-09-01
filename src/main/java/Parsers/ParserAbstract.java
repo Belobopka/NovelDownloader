@@ -14,10 +14,10 @@ public abstract class ParserAbstract { // класс для парсеров
     protected String start;
     protected String end;
     protected Text actiontarget;
+    protected String  UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) " +
+            "Chrome/33.0.1750.152 Safari/537.36";
     ParserAbstract(){
     }
-     String  UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) " +
-            "Chrome/33.0.1750.152 Safari/537.36";
     public void trustManager(){
         TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
             public java.security.cert.X509Certificate[] getAcceptedIssuers() { return null; }

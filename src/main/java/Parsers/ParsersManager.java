@@ -7,7 +7,7 @@ public class ParsersManager {
     private String start;
     private String end;
     private Text downloadingChapter;
-    String[] arrayStrings = new String[] {"mangafox","wuxiaworld"}; // need to make it Json external file
+    String[] arrayStrings = new String[] {"mangafox","wuxiaworld","gravitytales"}; // need to make it Json external file
     int parserType;
     private String downPath;
     ParserAbstract parserClass;
@@ -23,6 +23,8 @@ public class ParsersManager {
         this.downPath = downPath;
         parserClass = parserManager(parserType);
         defineParserParameters();
+    }
+    public void run(){
         parserClass.runParser();
     }
     public void defineParserParameters(){
@@ -55,14 +57,13 @@ public class ParsersManager {
     public ParserAbstract parserManager( int i){
         switch (i){
             case 0:
-                return JsoupMangaFox.parserFactory.returnParser();
+                return MangaFox.parserFactory.returnParser();
             case 1:
-                return JsoupWuxia.parserFactory.returnParser();
+                return Wuxia.parserFactory.returnParser();
             case 2:
-                break;
+                return GravityTales.parserFactory.returnParser();
             default:
-                return JsoupDefault.parserFactory.returnParser();
+                return Default.parserFactory.returnParser();
         }
-        return null;
     }
 }

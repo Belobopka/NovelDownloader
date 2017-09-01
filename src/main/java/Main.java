@@ -80,21 +80,23 @@ public class Main extends Application {
 
         final MyRunner r = new MyRunner(labelURLTextField, labelDownPathTextField,
                 labelFirstCnTextField, labelLastCnTextField, actionTarget);
-        final ArrayList<Thread> thread = new ArrayList<Thread>();
+        final ArrayList<Thread> threadArray = new ArrayList<Thread>();
 
         actionTarget.setFill(Color.FIREBRICK);
         primaryStage.setTitle("MangaFox_Download");
         primaryStage.show();
         startButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                thread.add(new Thread(r));
-                thread.get(thread.size() - 1).start();
+
+                threadArray.add(new Thread(r));
+                threadArray.get(threadArray.size() - 1).setDaemon(true);
+                threadArray.get(threadArray.size() - 1).start();
             }
         });
         stopButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                thread.get(0).interrupt();
-                thread.remove(0);
+                threadArray.get(threadArray.size() - 1).interrupt();
+                threadArray.remove(threadArray.size() - 1);
             }
         });
     }
@@ -118,6 +120,7 @@ public class Main extends Application {
             parsersManager = new ParsersManager(labelURLTextField.getText(),
                     labelFirstCnTextField.getText(),
                     labelLastCnTextField.getText(),actionTarget,labelDownPathTextField.getText());
+            parsersManager.run();
 
         }
     }

@@ -10,13 +10,13 @@ import java.io.*;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
-public class JsoupDefault extends ParserAbstract {
-    private JsoupDefault(){
+public class Wuxia extends ParserAbstract {
+    private Wuxia(){
         System.out.println("Wuxia is working");
     }
     public static ParserFacrory parserFactory = new ParserFacrory() {
         public ParserAbstract returnParser() {
-            return new JsoupDefault();
+            return new Wuxia();
         }
     };
 
@@ -62,13 +62,14 @@ public class JsoupDefault extends ParserAbstract {
     private   void httpsArrayWorkerOneFiler(String url,String path,String first,String last) throws IOException, InterruptedException {
         ArrayList<String> list = jsoupParsListofUrls(url);
         ArrayList<String> correctedList = listCorrector(list,first,last);
-        for(String uuu : correctedList){System.out.println(uuu);}
-        System.out.println(path);
-        String fileName = "";
         String HasPath  = path;
         if(path.length() <= 0){
             HasPath = System.getProperty("user.dir");
         }
+
+        for(String uuu : correctedList){System.out.println(uuu);}
+        System.out.println(path);
+        String fileName = "";
         if(first.length()>=1){
             fileName = "Chapter " + first + "-" + countch;
             if(last.length()>=1){
@@ -112,7 +113,7 @@ public class JsoupDefault extends ParserAbstract {
 
         }
         catch (IllegalArgumentException e){
-            System.out.println(e);
+
         }
         catch (HttpStatusException e){
             System.out.println(e);

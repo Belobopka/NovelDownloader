@@ -10,20 +10,20 @@ import java.io.*;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
-public class JsoupWuxia extends ParserAbstract {
-    private JsoupWuxia(){
+public class Default extends ParserAbstract {
+    private Default(){
         System.out.println("Wuxia is working");
     }
     public static ParserFacrory parserFactory = new ParserFacrory() {
         public ParserAbstract returnParser() {
-            return new JsoupWuxia();
+            return new Default();
         }
     };
 
     public void runParser()  {
         this.trustManager();
         try {
-            this.httpsArrayWorkerOneFiler(url,path,start,end);
+            this.httpsArrayWorkerOneFiler(url,path);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -47,33 +47,21 @@ public class JsoupWuxia extends ParserAbstract {
         System.out.print(countch);
         return linkHref;
     }
-    private  void jsoupParsURLPerCh(String url,String chapter,String path) throws IOException {
-        Document doc = Jsoup.connect(url).userAgent(UserAgent).get();
-        PrintWriter out = new PrintWriter(path + chapter + ".txt");
-        Elements content = doc.getElementsByClass("entry-content");
-        for (Element word : content) {
-            Elements elem = word.getElementsByTag("p");
-            for (Element p : elem) {
-                out.println(p.text());
-            }
-        }
-        out.close();
-    }
-    private   void httpsArrayWorkerOneFiler(String url,String path,String first,String last) throws IOException, InterruptedException {
+
+    private void httpsArrayWorkerOneFiler(String url,String path) throws IOException, InterruptedException {
         ArrayList<String> list = jsoupParsListofUrls(url);
-        ArrayList<String> correctedList = listCorrector(list,first,last);
+        ArrayList<String> correctedList = listCorrector(list,start,end);
+        for(String uuu : correctedList){System.out.println(uuu);}
+        System.out.println(path);
+        String fileName = "";
         String HasPath  = path;
         if(path.length() <= 0){
             HasPath = System.getProperty("user.dir");
         }
-
-        for(String uuu : correctedList){System.out.println(uuu);}
-        System.out.println(path);
-        String fileName = "";
-        if(first.length()>=1){
-            fileName = "Chapter " + first + "-" + countch;
-            if(last.length()>=1){
-                fileName = "Chapter " + first + "-" + last;
+        if(start.length()>=1){
+            fileName = "Chapter " + start + "-" + countch;
+            if(start.length()>=1){
+                fileName = "Chapter " + start + "-" + end;
             }
         }
 
@@ -113,7 +101,7 @@ public class JsoupWuxia extends ParserAbstract {
 
         }
         catch (IllegalArgumentException e){
-
+            System.out.println(e);
         }
         catch (HttpStatusException e){
             System.out.println(e);
@@ -138,11 +126,4 @@ public class JsoupWuxia extends ParserAbstract {
         }
         return correctedList;
     }
-    private  void httpsArrayWorkerPerCh(String url,String path) throws IOException {
-        ArrayList<String> list = jsoupParsListofUrls(url);
-        for(String http:list){
-            jsoupParsURLPerCh(http,"Chapter - 1-" + countch ,path);
-        }
-    }
-
 }

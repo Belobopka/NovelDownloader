@@ -14,12 +14,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class JsoupMangaFox extends ParserAbstract {
-    private JsoupMangaFox(){
+public class MangaFox extends ParserAbstract {
+    private MangaFox(){
     }
     public static ParserFacrory parserFactory = new ParserFacrory() {
         public ParserAbstract returnParser() {
-            return new JsoupMangaFox();
+            return new MangaFox();
         }
     };
     public void runParser()  {
@@ -32,8 +32,8 @@ public class JsoupMangaFox extends ParserAbstract {
             e.printStackTrace();
         }
     }
-    private static ArrayList<String> jsoupParsListOfUrls(String url) throws java.io.IOException, InterruptedException {
-        Document doc = docGet(url);
+    private  ArrayList<String> jsoupParsListOfUrls(String url) throws java.io.IOException, InterruptedException {
+        Document doc = responseGet(url).parse();
         Elements content = doc.getElementsByClass("tips");
         ArrayList<String> linkHref = new ArrayList<String>();
         for (Element link : content) {
@@ -52,32 +52,31 @@ public class JsoupMangaFox extends ParserAbstract {
         allImgURLs(correctedList,path,actiontarget);
     }
 
-    private static String chapterNumber(Document doc) throws IOException, InterruptedException {
+    private  String chapterNumber(Document doc) throws IOException, InterruptedException {
         return doc.select("meta[property=og:title]").attr("content");
     }
 
-    private static BufferedImage jsoupParsURLWorker(Document doc) throws IOException, InterruptedException {
+    private  BufferedImage jsoupParsURLWorker(Document doc) throws IOException, InterruptedException {
         String imageurl = doc.select("img").attr("src");
         URL link = new URL(imageurl);
         return ImageIO.read(link);
     }
-
-    private static Document docGet(String url) throws IOException, InterruptedException {
-        Connection.Response resp;
+    private Connection.Response responseGet(String url) throws IOException, InterruptedException {
+        Connection.Response resp = null;
         do {
-            Connection con = Jsoup.connect(url).timeout(30000).userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.120 Safari/535.2");
-            resp = con.ignoreContentType(true).ignoreHttpErrors(true).timeout(10000).execute();
-            Thread.sleep(2000);
+            Connection con = Jsoup.connect(url).timeout(30000).userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) " +
+                    "AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.120 Safari/535.2");
+                resp = con.ignoreContentType(true).ignoreHttpErrors(true).timeout(10000).execute();
+                Thread.sleep(2000);
         }
         while (!(resp.statusCode() == 200)) ;
-        return resp.parse();
+        return resp;
     }
-
-    private static ArrayList<String> allImgURLs(ArrayList<String> list, String path, Text text) throws IOException, InterruptedException {
+    private  ArrayList<String> allImgURLs(ArrayList<String> list, String path, Text text) throws IOException, InterruptedException {
         ArrayList<String> Churllist = new ArrayList<String>();
         for (String http : list) {
-            Thread.sleep(2000);
-            Document doc = docGet(http);
+            Connection.Response resp = responseGet(http);
+            Document doc = resp.parse();
             while ((doc.select("a[class=btn next_page]").attr("href").length() > 1) &&
                     (!(doc.select("a[class=btn next_page]").attr("href").equals("javascript:void(0);")))) {
                 String Title = doc.select("a[class=r]").attr("href");
@@ -90,10 +89,10 @@ public class JsoupMangaFox extends ParserAbstract {
                 }
                 File out1 = new File(HasPath + '\\' + chapter + ".jpg");
                 ImageIO.write(jsoupParsURLWorker(doc), "jpg", out1);
-                Thread.sleep(2000);
-                doc = docGet(Title + (doc.select("a[class=btn next_page]").attr("href")));
+                doc = responseGet((Title + (doc.select("a[class=btn next_page]").attr("href")))).parse();
             }
         }
+
         return Churllist;
     }
     private ArrayList<String> listCorrector(ArrayList<String> list,String start,String end){
