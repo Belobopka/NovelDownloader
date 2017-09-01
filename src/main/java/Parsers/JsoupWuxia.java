@@ -69,8 +69,17 @@ public class JsoupWuxia extends ParserAbstract {
         ArrayList<String> correctedList = listCorrector(list,first,last);
         for(String uuu : correctedList){System.out.println(uuu);}
         System.out.println(path);
+        String fileName = "";
+
         //Сделать так,чтобы  в имя ловило начало и конец (номер последнего чарптера)
-        PrintWriter out = new PrintWriter(path + '\\' + "Chapter 1-" +  countch + ".txt");
+        if(first.length()>=1){
+            fileName = "Chapter " + first + "-" + countch;
+            if(last.length()>=1){
+                fileName = "Chapter " + first + "-" + last;
+            }
+        }
+
+        PrintWriter out = new PrintWriter(path + '\\' + fileName + ".txt");
         for( String http:correctedList){
             out.println(jsoupParsURLWorker(http));
             Thread.sleep(2000);
