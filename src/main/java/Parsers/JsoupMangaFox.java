@@ -84,7 +84,11 @@ public class JsoupMangaFox extends ParserAbstract {
                 Churllist.add(Title + (doc.select("a[class=btn next_page]").attr("href")));
                 String chapter = chapterNumber(doc);
                 text.setText(chapter);
-                File out1 = new File(path + '\\' + chapter + ".jpg");
+                String HasPath  = path;
+                if(path.length() <= 0){
+                    HasPath = System.getProperty("user.dir");
+                }
+                File out1 = new File(HasPath + '\\' + chapter + ".jpg");
                 ImageIO.write(jsoupParsURLWorker(doc), "jpg", out1);
                 Thread.sleep(2000);
                 doc = docGet(Title + (doc.select("a[class=btn next_page]").attr("href")));

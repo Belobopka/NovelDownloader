@@ -60,6 +60,8 @@ public class ParsersManager {
                 return JsoupWuxia.parserFactory.returnParser();
             case 2:
                 break;
+            default:
+                return JsoupDefault.parserFactory.returnParser();
         }
         return null;
     }
