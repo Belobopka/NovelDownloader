@@ -8,6 +8,10 @@
   <component name="ChangeListManager">
     <list default="true" id="75bed5ea-6fd5-42d9-9f79-eadb2acd9940" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../NovelReader/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/src/main/java/Main.java" afterPath="$PROJECT_DIR$/../NovelReader/src/main/java/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/GravityTales.java" afterPath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/GravityTales.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Lnmtl.java" afterPath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Lnmtl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/ParserAbstract.java" afterPath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/ParserAbstract.java" />
     </list>
     <ignored path="$PROJECT_DIR$/../NovelReader/out/" />
     <ignored path="$PROJECT_DIR$/../NovelReader/target/" />
@@ -26,12 +30,12 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-179">
-              <caret line="88" column="19" lean-forward="false" selection-start-line="88" selection-start-column="8" selection-end-line="88" selection-end-column="19" />
+            <state relative-caret-position="547">
+              <caret line="109" column="17" lean-forward="true" selection-start-line="109" selection-start-column="17" selection-end-line="109" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3078#3738#0" expanded="true" />
-                <element signature="e#3737#3738#0" expanded="true" />
+                <element signature="e#3078#3858#0" expanded="true" />
+                <element signature="e#3857#3858#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -52,8 +56,8 @@
       <file leaf-file-name="MangaFox.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/MangaFox.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1011">
-              <caret line="27" column="25" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="25" />
+            <state relative-caret-position="349">
+              <caret line="101" column="25" lean-forward="false" selection-start-line="101" selection-start-column="16" selection-end-line="101" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -73,30 +77,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Lnmtl.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Lnmtl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Lnmtl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2484">
-              <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+            <state relative-caret-position="-2318">
+              <caret line="15" column="4" lean-forward="false" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5031#5039#0" expanded="true" />
+                <element signature="e#4858#4866#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GravityTales.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GravityTales.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/GravityTales.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="606">
-              <caret line="143" column="9" lean-forward="true" selection-start-line="143" selection-start-column="9" selection-end-line="143" selection-end-column="9" />
+            <state relative-caret-position="-1063">
+              <caret line="19" column="26" lean-forward="false" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#547#670#0" expanded="true" />
-                <element signature="e#669#670#0" expanded="true" />
-                <element signature="e#3769#3777#0" expanded="true" />
-                <element signature="e#4617#4625#0" expanded="true" />
+                <element signature="e#692#693#0" expanded="true" />
+                <element signature="e#3792#3800#0" expanded="true" />
+                <element signature="e#4640#4648#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -130,8 +133,8 @@
       <file leaf-file-name="ParserAbstract.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/ParserAbstract.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="39" column="38" lean-forward="false" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="38" />
+            <state relative-caret-position="276">
+              <caret line="53" column="37" lean-forward="true" selection-start-line="53" selection-start-column="37" selection-end-line="53" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -179,15 +182,15 @@
         <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Lmntl.java" />
         <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Wuxia.java" />
         <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Default.java" />
-        <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/GravityTales.java" />
         <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/MangaFox.java" />
         <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/ParsersManager.java" />
-        <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/ParserAbstract.java" />
         <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Connection.java" />
         <option value="$PROJECT_DIR$/../NovelReader/src/main/java/ConFabs.java" />
         <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/ConFabs.java" />
-        <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Main.java" />
+        <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/ParserAbstract.java" />
         <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Lnmtl.java" />
+        <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/GravityTales.java" />
+        <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Main.java" />
       </list>
     </option>
   </component>
@@ -272,6 +275,7 @@
     <property name="GenerateAntBuildDialog.backupFiles" value="true" />
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="novelreader" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../NovelReader/META-INF/MANIFEST.MF" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -546,7 +550,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.50213903" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.49786097" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32932165" sideWeight="0.49786097" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -612,8 +616,8 @@
           <caret line="92" column="11" lean-forward="false" selection-start-line="92" selection-start-column="11" selection-end-line="92" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3078#3738#0" expanded="true" />
-            <element signature="e#3737#3738#0" expanded="true" />
+            <element signature="e#3078#3858#0" expanded="true" />
+            <element signature="e#3857#3858#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -681,8 +685,8 @@
           <caret line="92" column="11" lean-forward="false" selection-start-line="92" selection-start-column="11" selection-end-line="92" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3078#3738#0" expanded="true" />
-            <element signature="e#3737#3738#0" expanded="true" />
+            <element signature="e#3078#3858#0" expanded="true" />
+            <element signature="e#3857#3858#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -750,8 +754,8 @@
           <caret line="92" column="11" lean-forward="true" selection-start-line="92" selection-start-column="11" selection-end-line="92" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3078#3738#0" expanded="true" />
-            <element signature="e#3737#3738#0" expanded="true" />
+            <element signature="e#3078#3858#0" expanded="true" />
+            <element signature="e#3857#3858#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -850,8 +854,8 @@
           <caret line="91" column="11" lean-forward="true" selection-start-line="91" selection-start-column="11" selection-end-line="91" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3078#3738#0" expanded="true" />
-            <element signature="e#3737#3738#0" expanded="true" />
+            <element signature="e#3078#3858#0" expanded="true" />
+            <element signature="e#3857#3858#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -870,8 +874,8 @@
           <caret line="95" column="33" lean-forward="false" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3078#3738#0" expanded="true" />
-            <element signature="e#3737#3738#0" expanded="true" />
+            <element signature="e#3078#3858#0" expanded="true" />
+            <element signature="e#3857#3858#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -921,8 +925,8 @@
           <caret line="95" column="33" lean-forward="true" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3078#3738#0" expanded="true" />
-            <element signature="e#3737#3738#0" expanded="true" />
+            <element signature="e#3078#3858#0" expanded="true" />
+            <element signature="e#3857#3858#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1004,34 +1008,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/ParserAbstract.java">
+    <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/ConFabs.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="39" column="38" lean-forward="false" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="38" />
+        <state relative-caret-position="286">
+          <caret line="13" column="50" lean-forward="false" selection-start-line="13" selection-start-column="50" selection-end-line="13" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/MangaFox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1011">
-          <caret line="27" column="25" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-179">
-          <caret line="88" column="19" lean-forward="false" selection-start-line="88" selection-start-column="8" selection-end-line="88" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3078#3738#0" expanded="true" />
-            <element signature="e#3737#3738#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1046,21 +1028,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Lnmtl.java">
+    <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/MangaFox.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2484">
-          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+        <state relative-caret-position="349">
+          <caret line="101" column="25" lean-forward="false" selection-start-line="101" selection-start-column="16" selection-end-line="101" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5031#5039#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/ConFabs.java">
+    <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="13" column="50" lean-forward="false" selection-start-line="13" selection-start-column="50" selection-end-line="13" selection-end-column="50" />
+        <state relative-caret-position="547">
+          <caret line="109" column="17" lean-forward="true" selection-start-line="109" selection-start-column="17" selection-end-line="109" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3078#3858#0" expanded="true" />
+            <element signature="e#3857#3858#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/ParserAbstract.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="53" column="37" lean-forward="true" selection-start-line="53" selection-start-column="37" selection-end-line="53" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1069,14 +1062,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/GravityTales.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="606">
-          <caret line="143" column="9" lean-forward="true" selection-start-line="143" selection-start-column="9" selection-end-line="143" selection-end-column="9" />
+        <state relative-caret-position="-1063">
+          <caret line="19" column="26" lean-forward="false" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#547#670#0" expanded="true" />
-            <element signature="e#669#670#0" expanded="true" />
-            <element signature="e#3769#3777#0" expanded="true" />
-            <element signature="e#4617#4625#0" expanded="true" />
+            <element signature="e#692#693#0" expanded="true" />
+            <element signature="e#3792#3800#0" expanded="true" />
+            <element signature="e#4640#4648#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Lnmtl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2318">
+          <caret line="15" column="4" lean-forward="false" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4858#4866#0" expanded="true" />
           </folding>
         </state>
       </provider>

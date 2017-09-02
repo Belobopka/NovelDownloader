@@ -13,9 +13,9 @@ import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
 public class GravityTales extends ParserAbstract {
-    String next = "Next Chapter";
-    boolean nextchapter = true;
-    String siteURL = "http://gravitytales.com";
+    private String next = "Next Chapter";
+   private boolean nextchapter = true;
+    private String siteURL = "http://gravitytales.com";
     public static ParserFacrory parserFactory = new ParserFacrory() {
         public ParserAbstract returnParser() {
             return new GravityTales();

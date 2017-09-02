@@ -50,7 +50,7 @@ public abstract class ParserAbstract { // класс для парсеров
         if((start.length() > 0 ) && (Integer.parseInt(start) < 0)){
             start = "1";
         }
-        if((start.length() > 0) && (Integer.parseInt(end) > list.size())){
+        if((end.length() > 0) && (Integer.parseInt(end) > list.size())){
             end = "" + (list.size());
         }
         if(start.length() >= 1){

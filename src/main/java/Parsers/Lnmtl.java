@@ -13,15 +13,12 @@ import java.io.PrintWriter;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 public class Lnmtl extends ParserAbstract {
-    public static ParserFacrory parserFactory = new ParserFacrory() {
+    static ParserFacrory parserFactory = new ParserFacrory() {
         public ParserAbstract returnParser() {
             return new Lnmtl();
         }
     };
     String next = "Next";
-    String  UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) " +
-            "Chrome/33.0.1750.152 Safari/537.36";
-
     public void runParser()  {
         try {
             deInit();
@@ -145,16 +142,15 @@ public class Lnmtl extends ParserAbstract {
     }
     private ArrayList<String> jsoupParsListofUrls(String  url) throws IOException, InterruptedException {
         ArrayList<String> chArray = new ArrayList<String>();
-        boolean nextChapter = true;
         try {
-           int chCountEnd = 0;
-           String nextUrl = url;
-           while (nextChapter) {
-               Document doc = Jsoup.connect(nextUrl).timeout(5000).userAgent(UserAgent).get();
-               if (nextChapterFinder(doc)) {
-                   chArray.add(nextUrl);
-                   System.out.println(nextUrl);
-                   nextUrl = nextChGetter(doc);
+            boolean nextChapter = true;
+            int chCountEnd = 0;
+            String nextUrl = url;
+            while (nextChapter) {
+                Document doc = Jsoup.connect(nextUrl).timeout(5000).userAgent(UserAgent).get();
+                if(nextChapterFinder(doc)) {
+                    chArray.add(nextUrl);
+                    nextUrl = nextChGetter(doc);
                    if(end.length() > 0 && Integer.parseInt(end) == (chCountEnd )){
                        return chArray;
                    }
@@ -170,7 +166,7 @@ public class Lnmtl extends ParserAbstract {
            System.out.println("Trying to repeat");
            chArray =  jsoupParsListofUrls(url);
        }
-
+        for(String s : chArray){System.out.println(s);}
         return chArray;
     }
 
