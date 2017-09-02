@@ -7,7 +7,7 @@ public class ParsersManager {
     private String start;
     private String end;
     private Text downloadingChapter;
-    String[] arrayStrings = new String[] {"mangafox","wuxiaworld","gravitytales"}; // need to make it Json external file
+    String[] arrayStrings = new String[] {"mangafox","wuxiaworld","gravitytales","lnmtl"}; // need to make it Json external file
     int parserType;
     private String downPath;
     ParserAbstract parserClass;
@@ -62,6 +62,8 @@ public class ParsersManager {
                 return Wuxia.parserFactory.returnParser();
             case 2:
                 return GravityTales.parserFactory.returnParser();
+            case 3:
+                return Lnmtl.parserFactory.returnParser();
             default:
                 return Default.parserFactory.returnParser();
         }

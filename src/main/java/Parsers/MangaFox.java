@@ -10,13 +10,13 @@ import org.jsoup.select.Elements;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class MangaFox extends ParserAbstract {
-    private MangaFox(){
-    }
+    private MangaFox(){ }
     public static ParserFacrory parserFactory = new ParserFacrory() {
         public ParserAbstract returnParser() {
             return new MangaFox();
@@ -63,17 +63,29 @@ public class MangaFox extends ParserAbstract {
     }
     private Connection.Response responseGet(String url) throws IOException, InterruptedException {
         Connection.Response resp = null;
-        do {
-            Connection con = Jsoup.connect(url).timeout(30000).userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) " +
-                    "AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.120 Safari/535.2");
+        try {
+            do {
+                Connection con = Jsoup.connect(url).timeout(30000).userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) " +
+                        "AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.120 Safari/535.2");
                 resp = con.ignoreContentType(true).ignoreHttpErrors(true).timeout(10000).execute();
-                Thread.sleep(2000);
+                Thread.sleep(1000);
+            }
+            while (!(resp.statusCode() == 200));
         }
-        while (!(resp.statusCode() == 200)) ;
+        catch (SocketTimeoutException e){
+            System.out.println("URL: " + url);
+            System.out.println("TimeOut: " + e);
+            System.out.println("Trying to repeat");
+            resp = responseGet(url);
+        }
         return resp;
     }
     private  ArrayList<String> allImgURLs(ArrayList<String> list, String path, Text text) throws IOException, InterruptedException {
         ArrayList<String> Churllist = new ArrayList<String>();
+        String HasPath  = path;
+        if(path.length() <= 0){
+            HasPath = System.getProperty("user.dir");
+        }
         for (String http : list) {
             Connection.Response resp = responseGet(http);
             Document doc = resp.parse();
@@ -83,10 +95,6 @@ public class MangaFox extends ParserAbstract {
                 Churllist.add(Title + (doc.select("a[class=btn next_page]").attr("href")));
                 String chapter = chapterNumber(doc);
                 text.setText(chapter);
-                String HasPath  = path;
-                if(path.length() <= 0){
-                    HasPath = System.getProperty("user.dir");
-                }
                 File out1 = new File(HasPath + '\\' + chapter + ".jpg");
                 ImageIO.write(jsoupParsURLWorker(doc), "jpg", out1);
                 doc = responseGet((Title + (doc.select("a[class=btn next_page]").attr("href")))).parse();
@@ -99,12 +107,24 @@ public class MangaFox extends ParserAbstract {
         ArrayList<String> correctedList = list;
         System.out.println("Start " + start.length());
         System.out.println("End " +end.length());
+        if((start.length() > 0 ) && (Integer.parseInt(start) < 0)){
+            start = "0";
+        }
+        if((start.length() > 0) && (Integer.parseInt(end) > list.size()-1)){
+            end = "" + (list.size()-1);
+        }
         if(start.length() >= 1){
             if(end.length() >= 1){
-                correctedList = new ArrayList<String>(list.subList(Integer.parseInt(start)-1,Integer.parseInt(end)));
+                correctedList = new ArrayList<String>(list.subList(Integer.parseInt(start)-1,Integer.parseInt(end)-1));
                 return correctedList;
             }
             correctedList = new ArrayList<String>(list.subList(Integer.parseInt(start)-1,list.size()-1));
+            return correctedList;
+        }
+        if(end.length()>=1){
+            correctedList = new ArrayList<String>(list.subList(list.size() - Integer.parseInt(end),
+                    list.size()-1));
+            return correctedList;
         }
         return correctedList;
     }

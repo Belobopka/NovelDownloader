@@ -34,9 +34,6 @@ public class GravityTales extends ParserAbstract {
     }
    private   void httpsArrayWorkerOneFiler(String url,String path,String first,String last) throws IOException, InterruptedException {
        if(url.contains("chapter")) {
-           actiontarget.setText("Please write URL of the first chapter");
-           Thread.currentThread().interrupt();
-
            ArrayList<String> list = jsoupParsListofUrls(url);
            ArrayList<String> correctedList = listCorrector(list, first, last);
            String HasPath = path;
@@ -71,7 +68,7 @@ public class GravityTales extends ParserAbstract {
     private  String jsoupParsURLWorker(String url) throws IOException {
         String text = "";
         try {
-            Connection.Response response = null;
+            Connection.Response response;
             response = Jsoup.connect(url).
                     userAgent(UserAgent).timeout(2000).ignoreContentType(true).execute();
             String conType = response.contentType();
@@ -152,12 +149,24 @@ public class GravityTales extends ParserAbstract {
         ArrayList<String> correctedList = list;
         System.out.println("Start " + start.length());
         System.out.println("End " +end.length());
+        if(Integer.parseInt(start) < 0){
+            start = "0";
+        }
+        if(Integer.parseInt(end) > list.size()-1){
+            end = "" +list.size();
+        }
         if(start.length() >= 1){
             if(end.length() >= 1){
-                correctedList = new ArrayList<String>(list.subList(Integer.parseInt(start)-1,Integer.parseInt(end)));
+                correctedList = new ArrayList<String>(list.subList(Integer.parseInt(start)-1,Integer.parseInt(end)-1));
                 return correctedList;
             }
             correctedList = new ArrayList<String>(list.subList(Integer.parseInt(start)-1,list.size()-1));
+            return correctedList;
+        }
+        if(end.length()>=1){
+            correctedList = new ArrayList<String>(list.subList(list.size() - 1 - Integer.parseInt(end),
+                    list.size()-1));
+            return correctedList;
         }
         return correctedList;
     }
