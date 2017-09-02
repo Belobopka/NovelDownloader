@@ -42,27 +42,28 @@ public abstract class ParserAbstract { // класс для парсеров
         };
         HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
     }
+
     protected ArrayList<String> listCorrector(ArrayList<String> list, String start, String end){
         ArrayList<String> correctedList = list;
         System.out.println("Start " + start.length());
         System.out.println("End " +end.length());
         if((start.length() > 0 ) && (Integer.parseInt(start) < 0)){
-            start = "0";
+            start = "1";
         }
-        if((start.length() > 0) && (Integer.parseInt(end) > list.size()-1)){
-            end = "" + (list.size()-1);
+        if((start.length() > 0) && (Integer.parseInt(end) > list.size())){
+            end = "" + (list.size());
         }
         if(start.length() >= 1){
             if(end.length() >= 1){
                 correctedList = new ArrayList<String>(list.subList(Integer.parseInt(start)-1,Integer.parseInt(end)));
                 return correctedList;
             }
-            correctedList = new ArrayList<String>(list.subList(Integer.parseInt(start)-1,list.size()-1));
+            correctedList = new ArrayList<String>(list.subList(Integer.parseInt(start)-1,list.size()));
             return correctedList;
         }
         if(end.length()>=1){
             correctedList = new ArrayList<String>(list.subList(list.size() - Integer.parseInt(end),
-                    list.size()-1));
+                    list.size()));
             return correctedList;
         }
         return correctedList;

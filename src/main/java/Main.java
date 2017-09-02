@@ -16,15 +16,16 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSocketFactory;
 import java.util.ArrayList;
 public class Main extends Application {
-
     ParsersManager parsersManager;
 
     public static void main(String[] args) {
         launch(args);
     }
-
     @Override
     public void start(Stage primaryStage) {
         GridPane grid = gridCreator();
@@ -87,10 +88,18 @@ public class Main extends Application {
         primaryStage.show();
         startButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-
+        if(!(threadArray.size() >= 1)){
                 threadArray.add(new Thread(r));
                 threadArray.get(threadArray.size() - 1).setDaemon(true);
                 threadArray.get(threadArray.size() - 1).start();
+        }
+        else{
+            threadArray.get(threadArray.size() - 1).interrupt();
+            threadArray.remove(threadArray.size() - 1);
+            threadArray.add(new Thread(r));
+            threadArray.get(threadArray.size() - 1).setDaemon(true);
+            threadArray.get(threadArray.size() - 1).start();
+        }
             }
         });
         stopButton.setOnAction(new EventHandler<ActionEvent>() {

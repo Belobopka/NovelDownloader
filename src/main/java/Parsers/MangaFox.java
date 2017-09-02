@@ -17,11 +17,13 @@ import java.util.Collections;
 
 public class MangaFox extends ParserAbstract {
     private MangaFox(){ }
+
     public static ParserFacrory parserFactory = new ParserFacrory() {
         public ParserAbstract returnParser() {
             return new MangaFox();
         }
     };
+
     public void runParser()  {
         this.trustManager();
         try {
@@ -32,6 +34,7 @@ public class MangaFox extends ParserAbstract {
             e.printStackTrace();
         }
     }
+
     private  ArrayList<String> jsoupParsListOfUrls(String url) throws java.io.IOException, InterruptedException {
         Document doc = responseGet(url).parse();
         Elements content = doc.getElementsByClass("tips");
@@ -46,21 +49,22 @@ public class MangaFox extends ParserAbstract {
         return linkHref;
     }
 
-    public  void jsoupParsURLPerCh() throws IOException, InterruptedException {
+    private void jsoupParsURLPerCh() throws IOException, InterruptedException {
         ArrayList<String> list = jsoupParsListOfUrls(this.url);
         ArrayList<String> correctedList = listCorrector(list,start,end);
         allImgURLs(correctedList,path,actiontarget);
     }
 
-    private  String chapterNumber(Document doc) throws IOException, InterruptedException {
+    private String chapterNumber(Document doc) throws IOException, InterruptedException {
         return doc.select("meta[property=og:title]").attr("content");
     }
 
-    private  BufferedImage jsoupParsURLWorker(Document doc) throws IOException, InterruptedException {
+    private BufferedImage jsoupParsURLWorker(Document doc) throws IOException, InterruptedException {
         String imageurl = doc.select("img").attr("src");
         URL link = new URL(imageurl);
         return ImageIO.read(link);
     }
+
     private Connection.Response responseGet(String url) throws IOException, InterruptedException {
         Connection.Response resp = null;
         try {
@@ -81,7 +85,9 @@ public class MangaFox extends ParserAbstract {
         }
         return resp;
     }
-    private  ArrayList<String> allImgURLs(ArrayList<String> list, String path, Text text) throws IOException, InterruptedException {
+
+    private  ArrayList<String> allImgURLs(ArrayList<String> list, String path, Text text) throws IOException,
+            InterruptedException {
         ArrayList<String> Churllist = new ArrayList<String>();
         String HasPath  = path;
         if(path.length() <= 0){
@@ -101,7 +107,6 @@ public class MangaFox extends ParserAbstract {
                 doc = responseGet((Title + (doc.select("a[class=btn next_page]").attr("href")))).parse();
             }
         }
-
         return Churllist;
     }
 }

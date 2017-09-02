@@ -1,31 +1,32 @@
 package Parsers;
+
 import org.jsoup.Connection;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 public class Lnmtl extends ParserAbstract {
-
     public static ParserFacrory parserFactory = new ParserFacrory() {
         public ParserAbstract returnParser() {
             return new Lnmtl();
         }
     };
     String next = "Next";
-    boolean nextchapter = true;
     String  UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) " +
             "Chrome/33.0.1750.152 Safari/537.36";
 
     public void runParser()  {
-        this.trustManager();
         try {
+            deInit();
             actiontarget.setText("It'll take some time");
-            this.httpsArrayWorkerOneFiler(url,path,start,end);
+            httpsArrayWorkerOneFiler(url,path,start,end);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -33,6 +34,10 @@ public class Lnmtl extends ParserAbstract {
         }
     }
 
+   private void deInit(){
+       HttpsURLConnection.setDefaultSSLSocketFactory(ConFabs.getSslSocketFactoryDefault());
+       HttpsURLConnection.setDefaultHostnameVerifier(ConFabs.getHostnameVerifierDefault());
+   }
 
     private   void httpsArrayWorkerOneFiler(String url,String path,String first,String last) throws IOException, InterruptedException {
         if(url.contains("chapter")) {
@@ -46,7 +51,6 @@ public class Lnmtl extends ParserAbstract {
             for (String uuu : correctedList) {
                 System.out.println(uuu);
             }
-            System.out.println(path);
             String fileName = "";
             if (first.length() >= 1) {
                 fileName = "Chapter " + first + "-" + countch;
@@ -85,21 +89,18 @@ public class Lnmtl extends ParserAbstract {
             }
             Document doc = response.parse();
             Elements content = doc.getElementsByClass("translated");
-            for (Element element : content) {
-                text += element.text();
-                text += "\n";
-            }
+            text = toStringWriter(content);
         }
         catch (IllegalArgumentException e){
             System.out.println(e);
             System.out.println( "IllegalArgumentException " + url);
-            nextchapter = false;
+
 
         }
         catch (HttpStatusException e){
             System.out.println(e);
             System.out.println("HttpStatusException" + url);
-            nextchapter = false;
+
 
 
         }
@@ -113,7 +114,16 @@ public class Lnmtl extends ParserAbstract {
         return text;
     }
 
-    public  boolean nextChapterFinder(Document doc){
+    private String toStringWriter(Elements content){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Element element : content) {
+            stringBuilder.append( element.text());
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    private   boolean nextChapterFinder(Document doc){
         Elements content = doc.getElementsByTag("a");
         for(Element cl:content){
             if(cl.text().equals(next)){
@@ -123,7 +133,7 @@ public class Lnmtl extends ParserAbstract {
         return false;
     }
 
-     String nextChGetter(Document doc){
+    private String nextChGetter(Document doc){
         ArrayList<String> linkHref = new ArrayList<String>();
         Elements content = doc.getElementsByTag("a");
         for(Element cl:content){
@@ -135,20 +145,31 @@ public class Lnmtl extends ParserAbstract {
     }
     private ArrayList<String> jsoupParsListofUrls(String  url) throws IOException, InterruptedException {
         ArrayList<String> chArray = new ArrayList<String>();
-        String nextUrl = url;
-        while(nextchapter) {
-            Document doc = Jsoup.connect(nextUrl).timeout(5000).userAgent(UserAgent).get();
-            if (nextChapterFinder(doc)) {
-                nextchapter = true;
-                nextUrl = nextChGetter(doc);
-                chArray.add(nextUrl);
-                System.out.println(nextUrl);
-
-
-            }
-            else nextchapter = false;
-            Thread.sleep(1000);
-        }
+        boolean nextChapter = true;
+        try {
+           int chCountEnd = 0;
+           String nextUrl = url;
+           while (nextChapter) {
+               Document doc = Jsoup.connect(nextUrl).timeout(5000).userAgent(UserAgent).get();
+               if (nextChapterFinder(doc)) {
+                   chArray.add(nextUrl);
+                   System.out.println(nextUrl);
+                   nextUrl = nextChGetter(doc);
+                   if(end.length() > 0 && Integer.parseInt(end) == (chCountEnd )){
+                       return chArray;
+                   }
+                   chCountEnd++;
+               }
+               else nextChapter = false;
+               Thread.sleep(1000);
+           }
+       }
+       catch (SocketTimeoutException e){
+           System.out.println("URL: " + url);
+           System.out.println("TimeOut: " + e);
+           System.out.println("Trying to repeat");
+           chArray =  jsoupParsListofUrls(url);
+       }
 
         return chArray;
     }
