@@ -144,30 +144,4 @@ public class GravityTales extends ParserAbstract {
         }
         return linkHref.get(0) ;
     }
-
-    private ArrayList<String> listCorrector(ArrayList<String> list,String start,String end){
-        ArrayList<String> correctedList = list;
-        System.out.println("Start " + start.length());
-        System.out.println("End " +end.length());
-        if(Integer.parseInt(start) < 0){
-            start = "0";
-        }
-        if(Integer.parseInt(end) > list.size()-1){
-            end = "" +list.size();
-        }
-        if(start.length() >= 1){
-            if(end.length() >= 1){
-                correctedList = new ArrayList<String>(list.subList(Integer.parseInt(start)-1,Integer.parseInt(end)-1));
-                return correctedList;
-            }
-            correctedList = new ArrayList<String>(list.subList(Integer.parseInt(start)-1,list.size()-1));
-            return correctedList;
-        }
-        if(end.length()>=1){
-            correctedList = new ArrayList<String>(list.subList(list.size() - 1 - Integer.parseInt(end),
-                    list.size()-1));
-            return correctedList;
-        }
-        return correctedList;
-    }
 }

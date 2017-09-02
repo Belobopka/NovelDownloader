@@ -69,6 +69,7 @@ public class MangaFox extends ParserAbstract {
                         "AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.120 Safari/535.2");
                 resp = con.ignoreContentType(true).ignoreHttpErrors(true).timeout(10000).execute();
                 Thread.sleep(1000);
+                System.out.println("URL: " + url);
             }
             while (!(resp.statusCode() == 200));
         }
@@ -102,30 +103,5 @@ public class MangaFox extends ParserAbstract {
         }
 
         return Churllist;
-    }
-    private ArrayList<String> listCorrector(ArrayList<String> list,String start,String end){
-        ArrayList<String> correctedList = list;
-        System.out.println("Start " + start.length());
-        System.out.println("End " +end.length());
-        if((start.length() > 0 ) && (Integer.parseInt(start) < 0)){
-            start = "0";
-        }
-        if((start.length() > 0) && (Integer.parseInt(end) > list.size()-1)){
-            end = "" + (list.size()-1);
-        }
-        if(start.length() >= 1){
-            if(end.length() >= 1){
-                correctedList = new ArrayList<String>(list.subList(Integer.parseInt(start)-1,Integer.parseInt(end)-1));
-                return correctedList;
-            }
-            correctedList = new ArrayList<String>(list.subList(Integer.parseInt(start)-1,list.size()-1));
-            return correctedList;
-        }
-        if(end.length()>=1){
-            correctedList = new ArrayList<String>(list.subList(list.size() - Integer.parseInt(end),
-                    list.size()-1));
-            return correctedList;
-        }
-        return correctedList;
     }
 }

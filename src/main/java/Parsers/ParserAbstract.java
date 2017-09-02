@@ -6,6 +6,7 @@ import javax.net.ssl.*;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 
 public abstract class ParserAbstract { // класс для парсеров
     protected  int countch = 0;
@@ -40,6 +41,31 @@ public abstract class ParserAbstract { // класс для парсеров
             public boolean verify(String hostname, SSLSession session) { return true; }
         };
         HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
+    }
+    protected ArrayList<String> listCorrector(ArrayList<String> list, String start, String end){
+        ArrayList<String> correctedList = list;
+        System.out.println("Start " + start.length());
+        System.out.println("End " +end.length());
+        if((start.length() > 0 ) && (Integer.parseInt(start) < 0)){
+            start = "0";
+        }
+        if((start.length() > 0) && (Integer.parseInt(end) > list.size()-1)){
+            end = "" + (list.size()-1);
+        }
+        if(start.length() >= 1){
+            if(end.length() >= 1){
+                correctedList = new ArrayList<String>(list.subList(Integer.parseInt(start)-1,Integer.parseInt(end)));
+                return correctedList;
+            }
+            correctedList = new ArrayList<String>(list.subList(Integer.parseInt(start)-1,list.size()-1));
+            return correctedList;
+        }
+        if(end.length()>=1){
+            correctedList = new ArrayList<String>(list.subList(list.size() - Integer.parseInt(end),
+                    list.size()-1));
+            return correctedList;
+        }
+        return correctedList;
     }
     public abstract void runParser();
     public void setUrl(String url){
