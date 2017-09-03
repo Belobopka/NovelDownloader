@@ -1,6 +1,8 @@
 package Parsers;
 
 import javafx.scene.text.Text;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import javax.net.ssl.*;
 import java.security.KeyManagementException;
@@ -15,6 +17,7 @@ public abstract class ParserAbstract { // класс для парсеров
     protected String start;
     protected String end;
     protected Text actiontarget;
+    protected ParsersManager parsersManager;
     protected String  UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) " +
             "Chrome/33.0.1750.152 Safari/537.36";
     ParserAbstract(){
@@ -68,6 +71,27 @@ public abstract class ParserAbstract { // класс для парсеров
         }
         return correctedList;
     }
+
+    protected String toStringWriter(Elements content){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Element element : content) {
+            stringBuilder.append( element.text());
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
+    }
+    protected boolean ifPrChEp(Element el){
+        return (el.attr("href").toLowerCase().contains("chapter")
+                || el.attr("href").toLowerCase().contains("prologue")
+                || el.attr("href").toLowerCase().contains("epilogue")
+                || el.attr("href").toLowerCase().contains("afterword"));
+    }
+    protected boolean ifPrChEpText(Element el){
+        return (el.text().toLowerCase().contains("chapter")
+                || el.text().toLowerCase().contains("prologue")
+                || el.text().toLowerCase().contains("epilogue")
+                || el.text().toLowerCase().contains("afterword"));
+    }
     public abstract void runParser();
     public void setUrl(String url){
         this.url = url;
@@ -84,6 +108,9 @@ public abstract class ParserAbstract { // класс для парсеров
         this.end = end;
     }
 
+    public void setParsersManager(ParsersManager parsersManager) {
+        this.parsersManager = parsersManager;
+    }
     public void setActiontarget(Text actiontarget) {
         this.actiontarget = actiontarget;
     }

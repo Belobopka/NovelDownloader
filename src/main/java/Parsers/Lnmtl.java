@@ -111,14 +111,7 @@ public class Lnmtl extends ParserAbstract {
         return text;
     }
 
-    private String toStringWriter(Elements content){
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Element element : content) {
-            stringBuilder.append( element.text());
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
-    }
+
 
     private   boolean nextChapterFinder(Document doc){
         Elements content = doc.getElementsByTag("a");
@@ -151,7 +144,7 @@ public class Lnmtl extends ParserAbstract {
                 if(nextChapterFinder(doc)) {
                     chArray.add(nextUrl);
                     nextUrl = nextChGetter(doc);
-                   if(end.length() > 0 && Integer.parseInt(end) == (chCountEnd )){
+                   if(start.length() == 0 && end.length() > 0 && Integer.parseInt(end) == (chCountEnd )){
                        return chArray;
                    }
                    chCountEnd++;

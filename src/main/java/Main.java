@@ -16,9 +16,6 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLSocketFactory;
 import java.util.ArrayList;
 public class Main extends Application {
     ParsersManager parsersManager;
@@ -131,7 +128,7 @@ public class Main extends Application {
             parsersManager = new ParsersManager(labelURLTextField.getText(),
                     labelFirstCnTextField.getText(),
                     labelLastCnTextField.getText(),actionTarget,labelDownPathTextField.getText());
-            parsersManager.run();
+            parsersManager.runAsMain();
 
         }
     }

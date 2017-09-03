@@ -7,7 +7,7 @@ public class ParsersManager {
     private String start;
     private String end;
     private Text downloadingChapter;
-    String[] arrayStrings = new String[] {"mangafox","wuxiaworld","gravitytales","lnmtl"}; // need to make it Json external file
+    String[] arrayStrings = new String[] {"mangafox","wuxiaworld","gravitytales","lnmtl","baka-tsuki"}; // need to make it Json external file
     int parserType;
     private String downPath;
     ParserAbstract parserClass;
@@ -15,24 +15,26 @@ public class ParsersManager {
 
     public ParsersManager(String url, String start, String end, Text downloadingChapter,String downPath){
         this.url = url;
-
         this.start = start;
         this.end = end;
         this.downloadingChapter = downloadingChapter;
         parserType = urlDefineParserType(url);
         this.downPath = downPath;
         parserClass = parserManager(parserType);
-        defineParserParameters();
+        defineParserParameters(downPath,url,start,end,downloadingChapter);
     }
-    public void run(){
+    public void runAsMain(){
         parserClass.runParser();
     }
-    public void defineParserParameters(){
+    //Требуется реализация запуска саб парсера,который будет обрабатыватьссылки с текстом на других сайтаъ
+    //public void runAsSub(){parserClass.runParserAsSub();}
+    public void defineParserParameters(String downPath,String url,String start,String end,Text downloadingChapter){
         parserClass.setPath(downPath);
         parserClass.setUrl(url);
         parserClass.setStart(start);
         parserClass.setEnd(end);
         parserClass.setActiontarget(downloadingChapter);
+        parserClass.setParsersManager(this);
     }
     public int urlDefineParserType(String URL){
         // returns an index for  site identification.
@@ -64,6 +66,8 @@ public class ParsersManager {
                 return GravityTales.parserFactory.returnParser();
             case 3:
                 return Lnmtl.parserFactory.returnParser();
+            case 4:
+                return BakaTsuki.parserFactory.returnParser();
             default:
                 return Default.parserFactory.returnParser();
         }

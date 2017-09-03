@@ -38,7 +38,10 @@ public class Default extends ParserAbstract {
         for (Element link : content) {
             Elements ele = link.getElementsByTag("a");
             for (Element el : ele) {
-                if(el.attr("href").contains("chapter")) {
+                if(el.attr("href").toLowerCase().contains("chapter")
+                        ||el.attr("href").toLowerCase().contains("prologue")
+                        ||el.attr("href").toLowerCase().contains("epilogue")
+                        ||el.attr("href").toLowerCase().contains("afterword")) {
                     linkHref.add(el.attr("href"));
                 }
             }

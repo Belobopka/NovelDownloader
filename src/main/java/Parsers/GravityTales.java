@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class GravityTales extends ParserAbstract {
     private String next = "Next Chapter";
-   private boolean nextchapter = true;
+    private boolean nextchapter = true;
     private String siteURL = "http://gravitytales.com";
     public static ParserFacrory parserFactory = new ParserFacrory() {
         public ParserAbstract returnParser() {
