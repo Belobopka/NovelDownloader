@@ -7,32 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="75bed5ea-6fd5-42d9-9f79-eadb2acd9940" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Japtem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/target/classes/Main$1.class" afterPath="$PROJECT_DIR$/../NovelReader/target/classes/Main$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/target/classes/Main$2.class" afterPath="$PROJECT_DIR$/../NovelReader/target/classes/Main$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/target/classes/Main$MyRunner.class" afterPath="$PROJECT_DIR$/../NovelReader/target/classes/Main$MyRunner.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/target/classes/Main.class" afterPath="$PROJECT_DIR$/../NovelReader/target/classes/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/BakaTsuki$1.class" afterPath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/BakaTsuki$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/BakaTsuki.class" afterPath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/BakaTsuki.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/Default.class" afterPath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/Default.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/GravityTales.class" afterPath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/GravityTales.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/Lnmtl.class" afterPath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/Lnmtl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/MangaFox$1.class" afterPath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/MangaFox$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/MangaFox.class" afterPath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/MangaFox.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/ParserAbstract$1.class" afterPath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/ParserAbstract$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/ParserAbstract$2.class" afterPath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/ParserAbstract$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/ParserAbstract.class" afterPath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/ParserAbstract.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/ParsersManager.class" afterPath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/ParsersManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/Wuxia.class" afterPath="$PROJECT_DIR$/../NovelReader/target/classes/Parsers/Wuxia.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../NovelReader/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/BakaTsuki.java" afterPath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/BakaTsuki.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Default.java" afterPath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Default.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/GravityTales.java" afterPath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/GravityTales.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Lnmtl.java" afterPath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Lnmtl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/MangaFox.java" afterPath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/MangaFox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/ParserAbstract.java" afterPath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/ParserAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/ParsersManager.java" afterPath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/ParsersManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Wuxia.java" afterPath="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Wuxia.java" />
     </list>
     <ignored path="$PROJECT_DIR$/../NovelReader/out/" />
     <ignored path="$PROJECT_DIR$/../NovelReader/target/" />
@@ -77,7 +53,7 @@
       <file leaf-file-name="Wuxia.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Wuxia.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
+            <state relative-caret-position="119">
               <caret line="52" column="47" lean-forward="false" selection-start-line="52" selection-start-column="41" selection-end-line="52" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -113,7 +89,7 @@
       <file leaf-file-name="ParsersManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/ParsersManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1076">
+            <state relative-caret-position="127">
               <caret line="75" column="29" lean-forward="false" selection-start-line="75" selection-start-column="29" selection-end-line="75" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -125,8 +101,8 @@
       <file leaf-file-name="Japtem.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Japtem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="581">
-              <caret line="93" column="0" lean-forward="true" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+            <state relative-caret-position="428">
+              <caret line="54" column="16" lean-forward="true" selection-start-line="54" selection-start-column="16" selection-end-line="56" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -161,8 +137,8 @@
       <file leaf-file-name="BakaTsuki.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/BakaTsuki.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="90" column="44" lean-forward="true" selection-start-line="90" selection-start-column="44" selection-end-line="90" selection-end-column="44" />
+            <state relative-caret-position="269">
+              <caret line="61" column="21" lean-forward="false" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1016#1136#0" expanded="true" />
@@ -212,8 +188,8 @@
         <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Default.java" />
         <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/GravityTales.java" />
         <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/ParsersManager.java" />
-        <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/BakaTsuki.java" />
         <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Japtem.java" />
+        <option value="$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/BakaTsuki.java" />
       </list>
     </option>
   </component>
@@ -248,6 +224,24 @@
             <path>
               <item name="NovelReader" type="b2602c69:ProjectViewProjectNode" />
               <item name="NovelReader" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NovelReader" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NovelReader" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NovelReader" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NovelReader" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NovelReader" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NovelReader" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+              <item name="NovelReader_jar2" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NovelReader" type="b2602c69:ProjectViewProjectNode" />
@@ -563,7 +557,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="22" y="26" width="1920" height="1036" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -573,7 +566,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.50213903" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.49786097" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32932165" sideWeight="0.49786097" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1057,9 +1050,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/ParsersManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="75" column="29" lean-forward="false" selection-start-line="75" selection-start-column="29" selection-end-line="75" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Wuxia.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
+        <state relative-caret-position="119">
           <caret line="52" column="47" lean-forward="false" selection-start-line="52" selection-start-column="41" selection-end-line="52" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1069,18 +1072,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/Japtem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="581">
-          <caret line="93" column="0" lean-forward="true" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/ParsersManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1076">
-          <caret line="75" column="29" lean-forward="false" selection-start-line="75" selection-start-column="29" selection-end-line="75" selection-end-column="29" />
+        <state relative-caret-position="428">
+          <caret line="54" column="16" lean-forward="true" selection-start-line="54" selection-start-column="16" selection-end-line="56" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1089,8 +1082,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../NovelReader/src/main/java/Parsers/BakaTsuki.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="90" column="44" lean-forward="true" selection-start-line="90" selection-start-column="44" selection-end-line="90" selection-end-column="44" />
+        <state relative-caret-position="269">
+          <caret line="61" column="21" lean-forward="false" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1016#1136#0" expanded="true" />

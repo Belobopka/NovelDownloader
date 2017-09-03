@@ -57,8 +57,8 @@ public class BakaTsuki extends ParserAbstract {
             for (Element el : ele) {
                 if(ifPrChEpText(el) || ifPrChEp(el)) {
                     String urlLink = el.attr("href");
-                    if(!(urlLink.toLowerCase().contains("http")|| url.toLowerCase().contains("www"))){
-                        urlLink = siteURL + url;
+                    if(!(urlLink.toLowerCase().contains("http")|| urlLink.toLowerCase().contains("www"))){
+                        urlLink = siteURL + urlLink;
                     }
                     linkHref.add(urlLink);
                 }
