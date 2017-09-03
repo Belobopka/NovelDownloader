@@ -2,15 +2,19 @@ package Parsers;
 
 import javafx.scene.text.Text;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class ParsersManager {
     private String url;
     private String start;
     private String end;
     private Text downloadingChapter;
-    String[] arrayStrings = new String[] {"mangafox","wuxiaworld","gravitytales","lnmtl","baka-tsuki"}; // need to make it Json external file
+    String[] arrayStrings = new String[] {"mangafox","wuxiaworld","gravitytales","lnmtl","baka-tsuki","untuned-strings","japtem"}; // need to make it Json external file
     int parserType;
     private String downPath;
     ParserAbstract parserClass;
+    HashMap<Integer,ParserAbstract> hashMapParsers;
 
 
     public ParsersManager(String url, String start, String end, Text downloadingChapter,String downPath){
@@ -20,7 +24,9 @@ public class ParsersManager {
         this.downloadingChapter = downloadingChapter;
         parserType = urlDefineParserType(url);
         this.downPath = downPath;
+        hashMapParsers = new HashMap<Integer, ParserAbstract>();
         parserClass = parserManager(parserType);
+        hashMapParsers.put(parserType,parserClass);
         defineParserParameters(downPath,url,start,end,downloadingChapter);
     }
     public void runAsMain(){
@@ -36,15 +42,12 @@ public class ParsersManager {
         parserClass.setActiontarget(downloadingChapter);
         parserClass.setParsersManager(this);
     }
-    public int urlDefineParserType(String URL){
+    public int urlDefineParserType(String url){
         // returns an index for  site identification.
-        String url = URL;
-        System.out.println(url);
         for(int i = 0; i < arrayStrings.length; i++){
             if(url.toLowerCase().contains(arrayStrings[i].toLowerCase())){
                 System.out.println(arrayStrings[i]);
                 return i;
-
             }
         }
         return -1;
@@ -55,7 +58,6 @@ public class ParsersManager {
   public int getParserType(){
       return parserType;
   }
- // Разработать интерфейс парсеров, сделать факторки для получения объекта класса.
     public ParserAbstract parserManager( int i){
         switch (i){
             case 0:
@@ -68,8 +70,26 @@ public class ParsersManager {
                 return Lnmtl.parserFactory.returnParser();
             case 4:
                 return BakaTsuki.parserFactory.returnParser();
+            case 5:
+                return Wuxia.parserFactory.returnParser();
+            case 6:
+                return Japtem.parserFactory.returnParser();
             default:
                 return Default.parserFactory.returnParser();
         }
+    }
+    public String urlTextReturner(ArrayList<String> urls){
+        StringBuilder stringBuilder = new StringBuilder();
+        for(String http: urls){
+            Integer parserKey = urlDefineParserType(http);
+            System.out.println(http);
+            System.out.println(urlDefineParserType(http));
+            if(!(hashMapParsers.containsKey(parserKey))){
+                hashMapParsers.put(parserKey,parserManager(parserKey));
+                stringBuilder.append( hashMapParsers.get(parserKey).runAsSubParser(http));
+            }
+            else stringBuilder.append( hashMapParsers.get(parserKey).runAsSubParser(http));
+        }
+        return stringBuilder.toString();
     }
 }

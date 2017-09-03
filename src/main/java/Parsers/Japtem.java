@@ -6,17 +6,19 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import java.io.*;
+
+import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
-public class Default extends ParserAbstract {
-    private Default(){
-        System.out.println("Default is working");
+public class Japtem extends ParserAbstract {
+    private Japtem(){
+        System.out.println("Japtem is working");
     }
+    private String siteURL = "http://japtem.com";
     public static ParserFacrory parserFactory = new ParserFacrory() {
         public ParserAbstract returnParser() {
-            return new Default();
+            return new Japtem();
         }
     };
 
@@ -24,13 +26,14 @@ public class Default extends ParserAbstract {
         this.trustManager();
         try {
             this.httpsArrayWorkerOneFiler(url,path,start,end);
-            actiontarget.setText("Default!Completed");
+            actiontarget.setText("Japtem!Completed");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
+
     public String runAsSubParser(String url)  {
         try {
             return jsoupParsURLWorker(url);
@@ -40,26 +43,32 @@ public class Default extends ParserAbstract {
         return "";
     }
 
-   protected   ArrayList<String> jsoupParsListofUrls(String url) throws java.io.IOException {
+    protected   ArrayList<String> jsoupParsListofUrls(String url) throws java.io.IOException {
         Document doc = Jsoup.connect(url).userAgent(UserAgent)
                 .get();
         Elements content = doc.getElementsByClass("entry-content");
         ArrayList<String> linkHref = new ArrayList<String>();
-        for (Element link : content) {
-            Elements ele = link.getElementsByTag("a");
-            for (Element el : ele) {
-                if(ifPrChEp(el) || ifPrChEpText(el)) {
-                    linkHref.add(el.attr("href"));
+        Elements ele = doc.getElementsByTag("a");
+        for (Element el : ele) {
+            if(ifPrChEpText(el) || ifPrChEp(el)) {
+                String urlLink = el.attr("href");
+                if(!(urlLink.toLowerCase().contains("http")|| urlLink.toLowerCase().contains("www"))){
+                    urlLink = siteURL + urlLink;
                 }
+                linkHref.add(urlLink);
             }
+
+        }
+        for(String string : linkHref){
+            System.out.println(string);
         }
         countch = linkHref.size();
         System.out.print(countch);
         return linkHref;
     }
 
-
     private  String jsoupParsURLWorker(String url) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
         String text = "";
         try {
             Connection.Response response = null;
@@ -75,29 +84,32 @@ public class Default extends ParserAbstract {
                     System.out.println("Text");
                     break;
             }
-            Document doc = response.parse();
-            Elements content = doc.getElementsByClass("entry-content");
+            Document doc  = response.parse();
+            Elements content;
+            if(url.toLowerCase().contains("japtem.blogspot")){
+                doc = Jsoup.parse(response.parse().toString().replaceAll("<br>", "<p>"));
+                content = doc.getElementsByClass("entry-content");
+            }
+            else content = doc.getElementsByClass("post-content");
+
             for (Element word : content) {
                 Elements elem = word.getElementsByTag("p");
-                for (Element p : elem) {
-                    text += (p.text());
-                    text += "\n";
-                }
+                stringBuilder.append(toStringWriter(elem));
             }
-
+            text = stringBuilder.toString();
         }
         catch (IllegalArgumentException e){
-            System.out.println(e);
+
         }
         catch (HttpStatusException e){
             System.out.println(e);
-
         }
         catch (SocketTimeoutException e){
             System.out.println("URL: " + url);
             System.out.println("TimeOut: " + e);
+            System.out.println("Trying to repeat");
+            text =  jsoupParsURLWorker(url);
         }
         return text;
     }
-
 }

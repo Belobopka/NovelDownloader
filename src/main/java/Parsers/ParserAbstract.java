@@ -5,6 +5,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import javax.net.ssl.*;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
@@ -93,6 +95,8 @@ public abstract class ParserAbstract { // класс для парсеров
                 || el.text().toLowerCase().contains("afterword"));
     }
     public abstract void runParser();
+    public abstract String runAsSubParser(String url) ;
+
     public void setUrl(String url){
         this.url = url;
     }
@@ -114,4 +118,29 @@ public abstract class ParserAbstract { // класс для парсеров
     public void setActiontarget(Text actiontarget) {
         this.actiontarget = actiontarget;
     }
+
+    protected void httpsArrayWorkerOneFiler(String url,String path,String first,String last) throws IOException, InterruptedException {
+        ArrayList<String> list = jsoupParsListofUrls(url);
+        ArrayList<String> correctedList = listCorrector(list,first,last);
+        String HasPath  = path;
+        if(path.length() <= 0){
+            HasPath = System.getProperty("user.dir");
+        }
+
+        for(String uuu : correctedList){System.out.println(uuu);}
+        System.out.println(path);
+        String fileName = "";
+        if(first.length()>=1){
+            fileName = "Chapter " + first + "-" + countch;
+            if(last.length()>=1){
+                fileName = "Chapter " + first + "-" + last;
+            }
+        }
+
+        PrintWriter out = new PrintWriter(HasPath + '\\' + fileName + ".txt");
+        out.println(parsersManager.urlTextReturner(correctedList));
+        Thread.sleep(2000);
+        out.close();
+    }
+    protected abstract ArrayList<String> jsoupParsListofUrls(String url) throws java.io.IOException ;
 }

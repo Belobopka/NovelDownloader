@@ -25,46 +25,26 @@ public class GravityTales extends ParserAbstract {
         this.trustManager();
         try {
             actiontarget.setText("It'll take some time");
-            this.httpsArrayWorkerOneFiler(url,path,start,end);
+            if(url.contains("chapter")) {
+                this.httpsArrayWorkerOneFiler(url, path, start, end);
+                actiontarget.setText("Completed! GravityTales");
+            }
+            else actiontarget.setText("Please write URL of the first chapter");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
-   private   void httpsArrayWorkerOneFiler(String url,String path,String first,String last) throws IOException, InterruptedException {
-       if(url.contains("chapter")) {
-           ArrayList<String> list = jsoupParsListofUrls(url);
-           ArrayList<String> correctedList = listCorrector(list, first, last);
-           String HasPath = path;
-           if (path.length() <= 0) {
-               HasPath = System.getProperty("user.dir");
-           }
 
-           for (String uuu : correctedList) {
-               System.out.println(uuu);
-           }
-           System.out.println(path);
-           String fileName = "";
-           if (first.length() >= 1) {
-               fileName = "Chapter " + first + "-" + countch;
-               if (last.length() >= 1) {
-                   fileName = "Chapter " + first + "-" + last;
-               }
-           }
-
-           PrintWriter out = new PrintWriter(HasPath + '\\' + fileName + ".txt");
-           for (String http : correctedList) {
-               out.println(jsoupParsURLWorker(http));
-               Thread.sleep(2000);
-
-           }
-           out.close();
-           actiontarget.setText("Completed! GravityTales");
-       }
-       else actiontarget.setText("Please write URL of the first chapter");
-   }
-
+    public String runAsSubParser(String url)  {
+        try {
+            return jsoupParsURLWorker(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
     private  String jsoupParsURLWorker(String url) throws IOException {
         String text = "";
         try {
@@ -105,7 +85,7 @@ public class GravityTales extends ParserAbstract {
         }
         return text;
     }
-    private ArrayList<String> jsoupParsListofUrls(String  url) throws IOException, InterruptedException {
+    protected ArrayList<String> jsoupParsListofUrls(String  url) throws IOException {
         ArrayList<String> chArray = new ArrayList<String>();
         String nextUrl = url;
         while(nextchapter) {
@@ -119,7 +99,11 @@ public class GravityTales extends ParserAbstract {
 
             }
             else nextchapter = false;
-            Thread.sleep(1000);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         return chArray;

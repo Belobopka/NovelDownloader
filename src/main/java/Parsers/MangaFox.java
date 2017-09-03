@@ -18,6 +18,12 @@ import java.util.Collections;
 public class MangaFox extends ParserAbstract {
     private MangaFox(){ }
 
+    public String runAsSubParser(String url)  {
+        return "";
+    }
+
+
+
     public static ParserFacrory parserFactory = new ParserFacrory() {
         public ParserAbstract returnParser() {
             return new MangaFox();
@@ -34,23 +40,31 @@ public class MangaFox extends ParserAbstract {
             e.printStackTrace();
         }
     }
-
-    private  ArrayList<String> jsoupParsListOfUrls(String url) throws java.io.IOException, InterruptedException {
-        Document doc = responseGet(url).parse();
-        Elements content = doc.getElementsByClass("tips");
+    @Override
+    protected   ArrayList<String> jsoupParsListofUrls(String url) throws java.io.IOException {
+        Document doc = null;
         ArrayList<String> linkHref = new ArrayList<String>();
-        for (Element link : content) {
-            Elements ele = link.getElementsByTag("a");
-            for (Element el : ele) {
-                linkHref.add(el.attr("href"));
+        try {
+            doc = responseGet(url).parse();
+            Elements content = doc.getElementsByClass("tips");
+
+            for (Element link : content) {
+                Elements ele = link.getElementsByTag("a");
+                for (Element el : ele) {
+                    linkHref.add(el.attr("href"));
+                }
             }
+        }
+        catch (InterruptedException e){
+            e.printStackTrace();
         }
         Collections.reverse(linkHref);
         return linkHref;
+
     }
 
     private void jsoupParsURLPerCh() throws IOException, InterruptedException {
-        ArrayList<String> list = jsoupParsListOfUrls(this.url);
+        ArrayList<String> list = jsoupParsListofUrls(this.url);
         ArrayList<String> correctedList = listCorrector(list,start,end);
         allImgURLs(correctedList,path,actiontarget);
     }

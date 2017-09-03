@@ -31,13 +31,24 @@ public class BakaTsuki extends ParserAbstract {
         this.trustManager();
         try {
             this.httpsArrayWorkerOneFiler(url,path,start,end);
+            actiontarget.setText("BakaTsuki!Completed");
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (InterruptedException e)  {
             e.printStackTrace();
         }
     }
-    private ArrayList<String> jsoupParsListofUrls(String url) throws java.io.IOException {
+
+    public String runAsSubParser(String url)  {
+        try {
+            return jsoupParsURLWorker(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    protected ArrayList<String> jsoupParsListofUrls(String url) throws java.io.IOException {
         Document doc = Jsoup.connect(url).userAgent(UserAgent)
                 .get();
         Elements content = doc.getElementsByClass("wikitable");
@@ -45,7 +56,11 @@ public class BakaTsuki extends ParserAbstract {
             Elements ele = doc.getElementsByTag("a");
             for (Element el : ele) {
                 if(ifPrChEpText(el) || ifPrChEp(el)) {
-                    linkHref.add(el.attr("href"));
+                    String urlLink = el.attr("href");
+                    if(!(urlLink.toLowerCase().contains("http")|| url.toLowerCase().contains("www"))){
+                        urlLink = siteURL + url;
+                    }
+                    linkHref.add(urlLink);
                 }
 
             }
@@ -54,37 +69,8 @@ public class BakaTsuki extends ParserAbstract {
         System.out.print(countch);
         return linkHref;
     }
-    private   void httpsArrayWorkerOneFiler(String url,String path,String first,String last) throws IOException, InterruptedException {
-        ArrayList<String> list = jsoupParsListofUrls(url);
-        ArrayList<String> correctedList = listCorrector(list,first,last);
-        String HasPath  = path;
-        if(path.length() <= 0){
-            HasPath = System.getProperty("user.dir");
-        }
 
-        for(String uuu : correctedList){System.out.println(uuu);}
-        System.out.println(path);
-        String fileName = "";
-        if(first.length()>=1){
-            fileName = "Chapter " + first + "-" + countch;
-            if(last.length()>=1){
-                fileName = "Chapter " + first + "-" + last;
-            }
-        }
-
-        PrintWriter out = new PrintWriter(HasPath + '\\' + fileName + ".txt");
-        for( String http:correctedList){
-            out.println(jsoupParsURLWorker(http));
-            Thread.sleep(2000);
-
-        }
-        actiontarget.setText("BakaTsuki!Completed");
-        out.close();
-    }
     private  String jsoupParsURLWorker(String url) throws IOException {
-        if(!(url.toLowerCase().contains("http")|| url.toLowerCase().contains("www"))){
-            url = siteURL + url;
-        }
         System.out.println(url);
         StringBuilder stringBuilder = new StringBuilder();
         String text = "";
@@ -125,4 +111,5 @@ public class BakaTsuki extends ParserAbstract {
         }
         return text;
     }
+
 }

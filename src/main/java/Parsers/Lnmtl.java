@@ -22,8 +22,11 @@ public class Lnmtl extends ParserAbstract {
     public void runParser()  {
         try {
             deInit();
-            actiontarget.setText("It'll take some time");
-            httpsArrayWorkerOneFiler(url,path,start,end);
+            if(url.contains("chapter")) {
+                this.httpsArrayWorkerOneFiler(url, path, start, end);
+                actiontarget.setText("Completed! Lnmtl");
+            }
+            else actiontarget.setText("Please write URL of the first chapter");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -31,42 +34,22 @@ public class Lnmtl extends ParserAbstract {
         }
     }
 
+    public String runAsSubParser(String url)  {
+        try {
+            return jsoupParsURLWorker(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+
    private void deInit(){
        HttpsURLConnection.setDefaultSSLSocketFactory(ConFabs.getSslSocketFactoryDefault());
        HttpsURLConnection.setDefaultHostnameVerifier(ConFabs.getHostnameVerifierDefault());
    }
 
-    private   void httpsArrayWorkerOneFiler(String url,String path,String first,String last) throws IOException, InterruptedException {
-        if(url.contains("chapter")) {
-            ArrayList<String> list = jsoupParsListofUrls(url);
-            ArrayList<String> correctedList = listCorrector(list, first, last);
-            String HasPath = path;
-            if (path.length() <= 0) {
-                HasPath = System.getProperty("user.dir");
-            }
 
-            for (String uuu : correctedList) {
-                System.out.println(uuu);
-            }
-            String fileName = "";
-            if (first.length() >= 1) {
-                fileName = "Chapter " + first + "-" + countch;
-                if (last.length() >= 1) {
-                    fileName = "Chapter " + first + "-" + last;
-                }
-            }
-
-            PrintWriter out = new PrintWriter(HasPath + '\\' + fileName + ".txt");
-            for (String http : correctedList) {
-                out.println(jsoupParsURLWorker(http));
-                Thread.sleep(2000);
-
-            }
-            out.close();
-            actiontarget.setText("Completed! Lnmtl");
-        }
-        else actiontarget.setText("Please write URL of the first chapter");
-    }
 
     private  String jsoupParsURLWorker(String url) throws IOException {
         String text = "";
@@ -133,7 +116,7 @@ public class Lnmtl extends ParserAbstract {
         }
         return linkHref.get(0) ;
     }
-    private ArrayList<String> jsoupParsListofUrls(String  url) throws IOException, InterruptedException {
+    protected  ArrayList<String> jsoupParsListofUrls(String  url) throws IOException  {
         ArrayList<String> chArray = new ArrayList<String>();
         try {
             boolean nextChapter = true;
@@ -150,8 +133,12 @@ public class Lnmtl extends ParserAbstract {
                    chCountEnd++;
                }
                else nextChapter = false;
-               Thread.sleep(1000);
-           }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
        }
        catch (SocketTimeoutException e){
            System.out.println("URL: " + url);
