@@ -41,6 +41,10 @@ public class Wuxia extends ParserAbstract {
         return "";
     }
 
+    protected String getSiteURL() {
+        return null;
+    }
+
     protected   ArrayList<String> jsoupParsListofUrls(String url) throws java.io.IOException {
         Document doc = Jsoup.connect(url).userAgent(UserAgent)
                 .get();
@@ -93,10 +97,10 @@ public class Wuxia extends ParserAbstract {
                 Elements elem = word.getElementsByTag("p");
                 stringBuilder.append(toStringWriter(elem));
             }
-        text = stringBuilder.toString();
+            text = stringBuilder.toString();
         }
         catch (IllegalArgumentException e){
-
+            e.printStackTrace();
         }
         catch (HttpStatusException e){
             System.out.println(e);

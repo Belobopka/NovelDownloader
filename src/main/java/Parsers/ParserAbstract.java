@@ -1,6 +1,7 @@
 package Parsers;
 
 import javafx.scene.text.Text;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -129,18 +130,33 @@ public abstract class ParserAbstract { // класс для парсеров
 
         for(String uuu : correctedList){System.out.println(uuu);}
         System.out.println(path);
-        String fileName = "";
+        String fileName = "Chapter-ALL";
         if(first.length()>=1){
             fileName = "Chapter " + first + "-" + countch;
             if(last.length()>=1){
                 fileName = "Chapter " + first + "-" + last;
             }
         }
-
         PrintWriter out = new PrintWriter(HasPath + '\\' + fileName + ".txt");
-        out.println(parsersManager.urlTextReturner(correctedList));
+        String textToWrite = parsersManager.urlTextReturner(correctedList);
+        out.println(textToWrite);
         Thread.sleep(2000);
         out.close();
     }
+    protected ArrayList<String>  linkWriteToArray(Document doc){
+        ArrayList<String> linkHref = new ArrayList<String>();
+        Elements ele = doc.getElementsByTag("a");
+        for (Element el : ele) {
+            if(ifPrChEpText(el) || ifPrChEp(el)) {
+                String urlLink = el.attr("href");
+                if(!(urlLink.toLowerCase().contains("http")|| urlLink.toLowerCase().contains("www"))){
+                    urlLink = getSiteURL() + urlLink;
+                }
+                linkHref.add(urlLink);
+            }
+        }
+        return linkHref;
+    }
+    protected abstract String getSiteURL();
     protected abstract ArrayList<String> jsoupParsListofUrls(String url) throws java.io.IOException ;
 }

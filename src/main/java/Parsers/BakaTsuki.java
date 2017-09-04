@@ -17,10 +17,11 @@ import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
 public class BakaTsuki extends ParserAbstract {
-    private String siteURL = "https://www.baka-tsuki.org";
+    String siteURL = "https://www.baka-tsuki.org";
     private BakaTsuki(){
         System.out.println("BakaTsuki is working");
     }
+
     public static ParserFacrory parserFactory = new ParserFacrory() {
         public ParserAbstract returnParser() {
             return new BakaTsuki();
@@ -48,26 +49,15 @@ public class BakaTsuki extends ParserAbstract {
         return "";
     }
 
+    protected String getSiteURL() {
+        return siteURL;
+    }
+
     protected ArrayList<String> jsoupParsListofUrls(String url) throws java.io.IOException {
         Document doc = Jsoup.connect(url).userAgent(UserAgent)
                 .get();
         Elements content = doc.getElementsByClass("wikitable");
-        ArrayList<String> linkHref = new ArrayList<String>();
-            Elements ele = doc.getElementsByTag("a");
-            for (Element el : ele) {
-                if(ifPrChEpText(el) || ifPrChEp(el)) {
-                    String urlLink = el.attr("href");
-                    if(!(urlLink.toLowerCase().contains("http")|| urlLink.toLowerCase().contains("www"))){
-                        urlLink = siteURL + urlLink;
-                    }
-                    linkHref.add(urlLink);
-                }
-
-            }
-
-        countch = linkHref.size();
-        System.out.print(countch);
-        return linkHref;
+        return linkWriteToArray(doc);
     }
 
     private  String jsoupParsURLWorker(String url) throws IOException {

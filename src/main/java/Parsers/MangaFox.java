@@ -22,6 +22,9 @@ public class MangaFox extends ParserAbstract {
         return "";
     }
 
+    protected String getSiteURL() {
+        return null;
+    }
 
 
     public static ParserFacrory parserFactory = new ParserFacrory() {

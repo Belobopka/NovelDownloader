@@ -43,8 +43,12 @@ public class Lnmtl extends ParserAbstract {
         return "";
     }
 
+    protected String getSiteURL() {
+        return null;
+    }
 
-   private void deInit(){
+
+    private void deInit(){
        HttpsURLConnection.setDefaultSSLSocketFactory(ConFabs.getSslSocketFactoryDefault());
        HttpsURLConnection.setDefaultHostnameVerifier(ConFabs.getHostnameVerifierDefault());
    }

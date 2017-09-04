@@ -45,6 +45,11 @@ public class GravityTales extends ParserAbstract {
         }
         return "";
     }
+
+    protected String getSiteURL() {
+        return siteURL;
+    }
+
     private  String jsoupParsURLWorker(String url) throws IOException {
         String text = "";
         try {
@@ -95,8 +100,6 @@ public class GravityTales extends ParserAbstract {
                 nextUrl = nextChGetter(doc);
                 chArray.add(nextUrl);
                 System.out.println(nextUrl);
-
-
             }
             else nextchapter = false;
             try {

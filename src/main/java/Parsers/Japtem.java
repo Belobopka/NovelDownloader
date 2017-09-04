@@ -43,6 +43,10 @@ public class Japtem extends ParserAbstract {
         return "";
     }
 
+    protected String getSiteURL() {
+        return siteURL;
+    }
+
     protected   ArrayList<String> jsoupParsListofUrls(String url) throws java.io.IOException {
         Document doc = Jsoup.connect(url).userAgent(UserAgent)
                 .get();

@@ -40,7 +40,11 @@ public class Default extends ParserAbstract {
         return "";
     }
 
-   protected   ArrayList<String> jsoupParsListofUrls(String url) throws java.io.IOException {
+    protected String getSiteURL() {
+        return null;
+    }
+
+    protected   ArrayList<String> jsoupParsListofUrls(String url) throws java.io.IOException {
         Document doc = Jsoup.connect(url).userAgent(UserAgent)
                 .get();
         Elements content = doc.getElementsByClass("entry-content");
@@ -57,8 +61,6 @@ public class Default extends ParserAbstract {
         System.out.print(countch);
         return linkHref;
     }
-
-
     private  String jsoupParsURLWorker(String url) throws IOException {
         String text = "";
         try {
