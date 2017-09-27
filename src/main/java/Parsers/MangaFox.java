@@ -108,8 +108,7 @@ public class MangaFox extends ParserAbstract {
         catch (java.io.EOFException e){
             System.out.println("EOF just chill");
             Thread.sleep(10000);
-            // аууу это дичь
-            resp = responseGet(url);
+            actiontarget.setText("EOSERROR");
         }
         return resp;
     }
