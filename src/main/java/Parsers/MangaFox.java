@@ -54,7 +54,7 @@ public class MangaFox extends ParserAbstract {
             for (Element link : content) {
                 Elements ele = link.getElementsByTag("a");
                 for (Element el : ele) {
-                    linkHref.add(el.attr("href"));
+                    linkHref.add("https:" + el.attr("href"));
                 }
             }
         }
@@ -62,6 +62,10 @@ public class MangaFox extends ParserAbstract {
             e.printStackTrace();
         }
         Collections.reverse(linkHref);
+       /* for (String ur: linkHref
+             ) {System.out.println(ur);
+
+        } */
         return linkHref;
 
     }
@@ -89,6 +93,7 @@ public class MangaFox extends ParserAbstract {
                 Connection con = Jsoup.connect(url).timeout(30000).userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) " +
                         "AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.120 Safari/535.2");
                 resp = con.ignoreContentType(true).ignoreHttpErrors(true).timeout(10000).execute();
+                System.out.println(resp.statusCode());
                 Thread.sleep(1000);
                 System.out.println("URL: " + url);
             }
@@ -98,6 +103,12 @@ public class MangaFox extends ParserAbstract {
             System.out.println("URL: " + url);
             System.out.println("TimeOut: " + e);
             System.out.println("Trying to repeat");
+            resp = responseGet(url);
+        }
+        catch (java.io.EOFException e){
+            System.out.println("EOF just chill");
+            Thread.sleep(10000);
+            // аууу это дичь
             resp = responseGet(url);
         }
         return resp;
@@ -116,13 +127,15 @@ public class MangaFox extends ParserAbstract {
             while ((doc.select("a[class=btn next_page]").attr("href").length() > 1) &&
                     (!(doc.select("a[class=btn next_page]").attr("href").equals("javascript:void(0);")))) {
                 String Title = doc.select("a[class=r]").attr("href");
+                System.out.println(Title);
                 Churllist.add(Title + (doc.select("a[class=btn next_page]").attr("href")));
                 String chapter = chapterNumber(doc);
                 text.setText(chapter);
                 File out1 = new File(HasPath + '\\' + chapter + ".jpg");
                 ImageIO.write(jsoupParsURLWorker(doc), "jpg", out1);
-                doc = responseGet((Title + (doc.select("a[class=btn next_page]").attr("href")))).parse();
+                doc = responseGet(("https:" + Title + (doc.select("a[class=btn next_page]").attr("href")))).parse();
             }
+
         }
         return Churllist;
     }

@@ -90,8 +90,11 @@ public class Main extends Application {
                         threadArray.add(new Thread(r));
                         threadArray.get(threadArray.size() - 1).setDaemon(true);
                         threadArray.get(threadArray.size() - 1).start();
+                        System.out.println( threadArray.get(threadArray.size() - 1).getState());
                     } else {
                         threadArray.get(threadArray.size() - 1).interrupt();
+
+
                         threadArray.remove(threadArray.size() - 1);
                         threadArray.add(new Thread(r));
                         threadArray.get(threadArray.size() - 1).setDaemon(true);
@@ -102,8 +105,11 @@ public class Main extends Application {
         stopButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 if(threadArray.size() != 0) {
-                    threadArray.get(threadArray.size() - 1).interrupt();
-                    threadArray.remove(threadArray.size() - 1);
+                    for(Thread thread :threadArray){
+                        thread.interrupt();
+
+                    }
+                    threadArray.clear();
                 }
             }
         });
