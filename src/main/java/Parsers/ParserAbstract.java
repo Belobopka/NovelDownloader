@@ -51,8 +51,6 @@ public abstract class ParserAbstract { // класс для парсеров
 
     protected ArrayList<String> listCorrector(ArrayList<String> list, String start, String end){
         ArrayList<String> correctedList = list;
-        System.out.println("Start " + start.length());
-        System.out.println("End " +end.length());
         if((start.length() > 0 ) && (Integer.parseInt(start) < 0)){
             start = "1";
         }
@@ -127,7 +125,6 @@ public abstract class ParserAbstract { // класс для парсеров
         if(path.length() <= 0){
             HasPath = System.getProperty("user.dir");
         }
-
         for(String uuu : correctedList){System.out.println(uuu);}
         System.out.println(path);
         String fileName = "Chapter-ALL";
@@ -138,7 +135,7 @@ public abstract class ParserAbstract { // класс для парсеров
             }
         }
         PrintWriter out = new PrintWriter(HasPath + '\\' + fileName + ".txt");
-        String textToWrite = parsersManager.urlTextReturner(correctedList);
+        String textToWrite = parsersManager.urlTextReturner(correctedList, first);
         out.println(textToWrite);
         Thread.sleep(2000);
         out.close();
@@ -157,6 +154,9 @@ public abstract class ParserAbstract { // класс для парсеров
         }
         return linkHref;
     }
+
+
+
     protected abstract String getSiteURL();
     protected abstract ArrayList<String> jsoupParsListofUrls(String url) throws java.io.IOException ;
 }

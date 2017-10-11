@@ -17,6 +17,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+//TODO Замена всех идентичных парсеров на один класс,который берет требуемые данные с JSON файла.
 public class Main extends Application {
     ParsersManager parsersManager;
 

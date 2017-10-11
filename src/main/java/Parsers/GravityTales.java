@@ -66,7 +66,7 @@ public class GravityTales extends ParserAbstract {
                     System.out.println("Text");
                     break;
             }
-            Document doc = response.parse();
+            Document doc = Jsoup.parse(response.parse().toString().replaceAll("</p>", "<p>"));
             Elements content = doc.getElementsByClass("entry-content");
             for (Element word : content) {
                 Elements elem = word.getElementsByTag("p");

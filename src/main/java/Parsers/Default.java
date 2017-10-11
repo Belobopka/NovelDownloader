@@ -31,6 +31,7 @@ public class Default extends ParserAbstract {
             e.printStackTrace();
         }
     }
+
     public String runAsSubParser(String url)  {
         try {
             return jsoupParsURLWorker(url);
@@ -61,7 +62,20 @@ public class Default extends ParserAbstract {
         System.out.print(countch);
         return linkHref;
     }
+    private  void jsoupParsURLPerCh(String url,String chapter,String path) throws IOException {
+        Document doc = Jsoup.connect(url).userAgent(UserAgent).get();
+        PrintWriter out = new PrintWriter(path + chapter + ".txt");
+        Elements content = doc.getElementsByClass("entry-content");
+        for (Element word : content) {
+            Elements elem = word.getElementsByTag("p");
+            for (Element p : elem) {
+                out.println(p.text());
+            }
+        }
+        out.close();
+    }
     private  String jsoupParsURLWorker(String url) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
         String text = "";
         try {
             Connection.Response response = null;
@@ -77,19 +91,16 @@ public class Default extends ParserAbstract {
                     System.out.println("Text");
                     break;
             }
-            Document doc = response.parse();
+            Document doc = Jsoup.parse(response.parse().toString().replaceAll("</p>", "<p>"));
             Elements content = doc.getElementsByClass("entry-content");
             for (Element word : content) {
                 Elements elem = word.getElementsByTag("p");
-                for (Element p : elem) {
-                    text += (p.text());
-                    text += "\n";
-                }
+                stringBuilder.append(toStringWriter(elem));
             }
-
+            text = stringBuilder.toString();
         }
         catch (IllegalArgumentException e){
-            System.out.println(e);
+            e.printStackTrace();
         }
         catch (HttpStatusException e){
             System.out.println(e);
@@ -98,8 +109,9 @@ public class Default extends ParserAbstract {
         catch (SocketTimeoutException e){
             System.out.println("URL: " + url);
             System.out.println("TimeOut: " + e);
+            System.out.println("Trying to repeat");
+            text =  jsoupParsURLWorker(url);
         }
         return text;
     }
-
 }

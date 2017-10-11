@@ -54,7 +54,14 @@ public class MangaFox extends ParserAbstract {
             for (Element link : content) {
                 Elements ele = link.getElementsByTag("a");
                 for (Element el : ele) {
-                    linkHref.add("https:" + el.attr("href"));
+                    if(!(el.attr("href").toLowerCase().contains("https:") ||
+                            el.attr("href").toLowerCase().contains("www.")))
+                    {
+                        linkHref.add("https:" + el.attr("href"));
+                    }
+                    else {
+                        linkHref.add(el.attr("href"));
+                    }
                 }
             }
         }
@@ -103,6 +110,7 @@ public class MangaFox extends ParserAbstract {
             System.out.println("URL: " + url);
             System.out.println("TimeOut: " + e);
             System.out.println("Trying to repeat");
+            actiontarget.setText("Error. Trying To Repeat");
             resp = responseGet(url);
         }
         catch (java.io.EOFException e){
@@ -126,13 +134,17 @@ public class MangaFox extends ParserAbstract {
             while ((doc.select("a[class=btn next_page]").attr("href").length() > 1) &&
                     (!(doc.select("a[class=btn next_page]").attr("href").equals("javascript:void(0);")))) {
                 String Title = doc.select("a[class=r]").attr("href");
+                if(!(Title.toLowerCase().contains("https:") ||
+                        Title.toLowerCase().contains("www."))){
+                    Title = "https:" + Title; // www. ?
+                }
                 System.out.println(Title);
                 Churllist.add(Title + (doc.select("a[class=btn next_page]").attr("href")));
                 String chapter = chapterNumber(doc);
                 text.setText(chapter);
                 File out1 = new File(HasPath + '\\' + chapter + ".jpg");
                 ImageIO.write(jsoupParsURLWorker(doc), "jpg", out1);
-                doc = responseGet(("https:" + Title + (doc.select("a[class=btn next_page]").attr("href")))).parse();
+                doc = responseGet((Title + (doc.select("a[class=btn next_page]").attr("href")))).parse();
             }
 
         }

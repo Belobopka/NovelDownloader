@@ -2,28 +2,23 @@ package Parsers;
 
 import javafx.scene.text.Text;
 
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ParsersManager {
-    private String url;
-    private String start;
-    private String end;
-    private Text downloadingChapter;
+//TODO Найден способ брать названия классов через reflection, название в String Будут лежать в json файле.
     String[] arrayStrings = new String[] {"mangafox","wuxiaworld","gravitytales","lnmtl","baka-tsuki","untuned-strings","japtem"}; // need to make it Json external file
     int parserType;
-    private String downPath;
     ParserAbstract parserClass;
     HashMap<Integer,ParserAbstract> hashMapParsers;
 
 
     public ParsersManager(String url, String start, String end, Text downloadingChapter,String downPath){
-        this.url = url;
-        this.start = start;
-        this.end = end;
-        this.downloadingChapter = downloadingChapter;
         parserType = urlDefineParserType(url);
-        this.downPath = downPath;
         hashMapParsers = new HashMap<Integer, ParserAbstract>();
         parserClass = parserManager(parserType);
         hashMapParsers.put(parserType,parserClass);
@@ -63,6 +58,7 @@ public class ParsersManager {
             case 0:
                 return MangaFox.parserFactory.returnParser();
             case 1:
+
                 return Wuxia.parserFactory.returnParser();
             case 2:
                 return GravityTales.parserFactory.returnParser();
@@ -71,6 +67,7 @@ public class ParsersManager {
             case 4:
                 return BakaTsuki.parserFactory.returnParser();
             case 5:
+
                 return Wuxia.parserFactory.returnParser();
             case 6:
                 return Japtem.parserFactory.returnParser();
@@ -78,17 +75,50 @@ public class ParsersManager {
                 return Default.parserFactory.returnParser();
         }
     }
-    public String urlTextReturner(ArrayList<String> urls){
+    public String urlTextReturner(ArrayList<String> urls, String first) throws InterruptedException {
+        int countCh = 0;
+        if (first.length() != 0) {
+            countCh = Integer.parseInt(first);
+        }
         StringBuilder stringBuilder = new StringBuilder();
+        // Использование reflection , название класса брать с json
+        /*
+        Class<?> cls = null;
+        try {
+            cls = Class.forName("Parsers.Wuxia");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Field field = null;
+
+        try {
+            field = cls.getField("parserFactory");
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+        Object obj = null;
+        try {
+            obj = (field.get(null));
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        ParserAbstract parserAbstract = (ParserAbstract) ((ParserFacrory) obj).returnParser();
+*/
+
+
         for(String http: urls){
-            Integer parserKey = urlDefineParserType(http);
             System.out.println(http);
-            System.out.println(urlDefineParserType(http));
-            if(!(hashMapParsers.containsKey(parserKey))){
-                hashMapParsers.put(parserKey,parserManager(parserKey));
-                stringBuilder.append( hashMapParsers.get(parserKey).runAsSubParser(http));
+            Integer parserKey = urlDefineParserType(http);
+         //   System.out.println(http);
+
+            if(!(hashMapParsers.containsKey(parserKey))) {
+                hashMapParsers.put(parserKey, parserManager(parserKey));
             }
-            else stringBuilder.append( hashMapParsers.get(parserKey).runAsSubParser(http));
+            stringBuilder.append("Chapter_" + countCh + "\n" + hashMapParsers.get(parserKey).runAsSubParser(http));
+            countCh++;
+            Thread.sleep(500);
+
         }
         return stringBuilder.toString();
     }
