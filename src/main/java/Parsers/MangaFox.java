@@ -54,7 +54,7 @@ public class MangaFox extends ParserAbstract {
             for (Element link : content) {
                 Elements ele = link.getElementsByTag("a");
                 for (Element el : ele) {
-                    if(!(el.attr("href").toLowerCase().contains("https:") ||
+                  /*  if(!(el.attr("href").toLowerCase().contains("https:") ||
                             el.attr("href").toLowerCase().contains("www.")))
                     {
                         linkHref.add("https:" + el.attr("href"));
@@ -62,6 +62,9 @@ public class MangaFox extends ParserAbstract {
                     else {
                         linkHref.add(el.attr("href"));
                     }
+                    */
+                 //   linkHref.add("http://www." + el.attr("href").substring(2));
+                    linkHref.add(el.attr("abs:href"));
                 }
             }
         }
@@ -69,6 +72,7 @@ public class MangaFox extends ParserAbstract {
             e.printStackTrace();
         }
         Collections.reverse(linkHref);
+        System.out.println(linkHref);
        /* for (String ur: linkHref
              ) {System.out.println(ur);
 
@@ -131,20 +135,22 @@ public class MangaFox extends ParserAbstract {
         for (String http : list) {
             Connection.Response resp = responseGet(http);
             Document doc = resp.parse();
-            while ((doc.select("a[class=btn next_page]").attr("href").length() > 1) &&
-                    (!(doc.select("a[class=btn next_page]").attr("href").equals("javascript:void(0);")))) {
-                String Title = doc.select("a[class=r]").attr("href");
-                if(!(Title.toLowerCase().contains("https:") ||
+            while ((doc.select("a[class=btn next_page]").attr("abs:href").length() > 1) &&
+                    (!(doc.select("a[class=btn next_page]").attr("abs:href").equals("javascript:void(0);")))) {
+                String Title = doc.select("a[class=r]").attr("abs:href");
+              /*  if(!(Title.toLowerCase().contains("https:") ||
                         Title.toLowerCase().contains("www."))){
                     Title = "https:" + Title; // www. ?
                 }
-                System.out.println(Title);
-                Churllist.add(Title + (doc.select("a[class=btn next_page]").attr("href")));
+                */
+             //   Title = "http://www." + Title.substring(2);
+                System.out.println("Title" + Title);
+                Churllist.add(Title + (doc.select(  "a[class=btn next_page]").attr("abs:href")));
                 String chapter = chapterNumber(doc);
                 text.setText(chapter);
                 File out1 = new File(HasPath + '\\' + chapter + ".jpg");
                 ImageIO.write(jsoupParsURLWorker(doc), "jpg", out1);
-                doc = responseGet((Title + (doc.select("a[class=btn next_page]").attr("href")))).parse();
+                doc = responseGet((Title + (doc.select("a[class=btn next_page]").attr("abs:href")))).parse();
             }
 
         }
