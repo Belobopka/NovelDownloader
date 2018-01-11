@@ -94,7 +94,12 @@ public class MangaFox extends ParserAbstract {
     private BufferedImage jsoupParsURLWorker(Document doc) throws IOException, InterruptedException {
         String imageurl = doc.select("img").attr("src");
         URL link = new URL(imageurl);
-        return ImageIO.read(link);
+        try {
+            return ImageIO.read(link);
+        }
+        catch (javax.imageio.IIOException e){
+            return null;
+        }
     }
 
     private Connection.Response responseGet(String url) throws IOException, InterruptedException {
@@ -149,7 +154,10 @@ public class MangaFox extends ParserAbstract {
                 String chapter = chapterNumber(doc);
                 text.setText(chapter);
                 File out1 = new File(HasPath + '\\' + chapter + ".jpg");
-                ImageIO.write(jsoupParsURLWorker(doc), "jpg", out1);
+                BufferedImage mangaImage = jsoupParsURLWorker(doc);
+                if(mangaImage != null) {
+                    ImageIO.write(jsoupParsURLWorker(doc), "jpg", out1);
+                }
                 doc = responseGet((Title + (doc.select("a[class=btn next_page]").attr("abs:href")))).parse();
             }
 
