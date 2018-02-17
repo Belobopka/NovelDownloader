@@ -84,9 +84,9 @@ public class Main extends Application {
         actionTarget.setFill(Color.FIREBRICK);
         primaryStage.setTitle("MangaFox_Download");
         primaryStage.show();
+        // Poor multithread realisation. Wanted to make multi downloading feature.
         startButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-
                     if (!(threadArray.size() >= 1)) {
                         threadArray.add(new Thread(r));
                         threadArray.get(threadArray.size() - 1).setDaemon(true);

@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class ParsersManager {
 //TODO Найден способ брать названия классов через reflection, название в String Будут лежать в json файле.
-    String[] arrayStrings = new String[] {"mangafox","wuxiaworld","gravitytales","lnmtl","baka-tsuki","untuned-strings","japtem"}; // need to make it Json external file
+    String[] arrayStrings = new String[] {"fanfox","wuxiaworld","gravitytales","lnmtl","baka-tsuki","untuned-strings","japtem"}; // need to make it Json external file
     int parserType;
     ParserAbstract parserClass;
     HashMap<Integer,ParserAbstract> hashMapParsers;
@@ -58,7 +58,6 @@ public class ParsersManager {
             case 0:
                 return MangaFox.parserFactory.returnParser();
             case 1:
-
                 return Wuxia.parserFactory.returnParser();
             case 2:
                 return GravityTales.parserFactory.returnParser();
@@ -67,7 +66,6 @@ public class ParsersManager {
             case 4:
                 return BakaTsuki.parserFactory.returnParser();
             case 5:
-
                 return Wuxia.parserFactory.returnParser();
             case 6:
                 return Japtem.parserFactory.returnParser();
@@ -82,10 +80,12 @@ public class ParsersManager {
         }
         StringBuilder stringBuilder = new StringBuilder();
         // Использование reflection , название класса брать с json
+        // Подготовка в reflection, для гибкого выбора нужного парсера,без использования case
         /*
+        jsonClassName = "" // Взять название класса с json
         Class<?> cls = null;
         try {
-            cls = Class.forName("Parsers.Wuxia");
+            cls = Class.forName("Parsers." + jsonClassName); //Поиск класса по имени
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -103,7 +103,7 @@ public class ParsersManager {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        ParserAbstract parserAbstract = (ParserAbstract) ((ParserFacrory) obj).returnParser();
+        ParserAbstract parserAbstract = (ParserAbstract) ((ParserFactory) obj).returnParser();
 */
 
 
