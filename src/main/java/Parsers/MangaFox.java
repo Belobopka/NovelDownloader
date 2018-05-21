@@ -8,10 +8,13 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -50,7 +53,6 @@ public class MangaFox extends ParserAbstract {
         try {
             doc = responseGet(url).parse();
             Elements content = doc.getElementsByClass("tips");
-
             for (Element link : content) {
                 Elements ele = link.getElementsByTag("a");
                 for (Element el : ele) {
@@ -92,12 +94,17 @@ public class MangaFox extends ParserAbstract {
     }
 
     private BufferedImage jsoupParsURLWorker(Document doc) throws IOException, InterruptedException {
-        String imageurl = doc.select("img").attr("src");
+        String imageurl = doc.getElementById("image").attr("abs:src");
         URL link = new URL(imageurl);
+        // link = new URL(link.getProtocol() + "://" + link.getHost() + link.getPath());
+        HttpURLConnection conn = (HttpURLConnection) link.openConnection();
+        conn.addRequestProperty("User-Agent", "Mozilla/4.76");
         try {
-            return ImageIO.read(link);
+
+            return ImageIO.read(conn.getInputStream());
         }
         catch (javax.imageio.IIOException e){
+            System.out.println("javax.imageio.IIOException e" + e);
             return null;
         }
     }
