@@ -52,7 +52,7 @@ public class MangaFox extends ParserAbstract {
         ArrayList<String> linkHref = new ArrayList<String>();
         try {
             doc = responseGet(url).parse();
-            Elements content = doc.getElementsByClass("tips");
+            Elements content = doc.getElementsByClass("detail-main-list");
             for (Element link : content) {
                 Elements ele = link.getElementsByTag("a");
                 for (Element el : ele) {
@@ -74,7 +74,6 @@ public class MangaFox extends ParserAbstract {
             e.printStackTrace();
         }
         Collections.reverse(linkHref);
-        System.out.println(linkHref);
        /* for (String ur: linkHref
              ) {System.out.println(ur);
 
@@ -94,13 +93,14 @@ public class MangaFox extends ParserAbstract {
     }
 
     private BufferedImage jsoupParsURLWorker(Document doc) throws IOException, InterruptedException {
-        String imageurl = doc.getElementById("image").attr("abs:src");
+        System.out.println("imageurl" + doc.getElementsByClass("reader-main-img"));
+        String imageurl = doc.getElementsByClass("reader-main-img").first().attr("abs:src");
+        // System.out.println("imageurl" + imageurl);
         URL link = new URL(imageurl);
         // link = new URL(link.getProtocol() + "://" + link.getHost() + link.getPath());
         HttpURLConnection conn = (HttpURLConnection) link.openConnection();
         conn.addRequestProperty("User-Agent", "Mozilla/4.76");
         try {
-
             return ImageIO.read(conn.getInputStream());
         }
         catch (javax.imageio.IIOException e){
@@ -147,26 +147,58 @@ public class MangaFox extends ParserAbstract {
         for (String http : list) {
             Connection.Response resp = responseGet(http);
             Document doc = resp.parse();
-            while ((doc.select("a[class=btn next_page]").attr("abs:href").length() > 1) &&
-                    (!(doc.select("a[class=btn next_page]").attr("abs:href").equals("javascript:void(0);")))) {
-                String Title = doc.select("a[class=r]").attr("abs:href");
-              /*  if(!(Title.toLowerCase().contains("https:") ||
-                        Title.toLowerCase().contains("www."))){
-                    Title = "https:" + Title; // www. ?
+            Element conti = doc.getElementsByClass("cp-pager-list").first();
+            Element span = conti.getElementsByTag("span").first();
+            Elements ahs = span.getElementsByTag("a");
+            Integer index = 0;
+            System.out.println("ahs" + ahs);
+            for (Element a : ahs) {
+                if (!(a.text().equals("&gt;"))) {
+                    if(index == 0) {
+                        BufferedImage mangaImage = jsoupParsURLWorker(doc);
+                        // File out1 = new File(HasPath + '\\' + index + ".jpg");
+//                        if(mangaImage != null) {
+//                            ImageIO.write(jsoupParsURLWorker(eleDoc), "jpg", out1);
+//                        }
+                        index++;
+                    } else {
+                        String link = a.attr("abs:href");
+                        System.out.println("a" + a);
+
+                        Connection.Response eleResp = responseGet(link);
+                        Document eleDoc = eleResp.parse();
+                        // File out1 = new File(HasPath + '\\' + index + ".jpg");
+                        BufferedImage mangaImage = jsoupParsURLWorker(eleDoc);
+//                    if(mangaImage != null) {
+//                        ImageIO.write(jsoupParsURLWorker(eleDoc), "jpg", out1);
+//                    }
+                        index++;
+                    }
+
                 }
-                */
-             //   Title = "http://www." + Title.substring(2);
-                System.out.println("Title" + Title);
-                Churllist.add(Title + (doc.select(  "a[class=btn next_page]").attr("abs:href")));
-                String chapter = chapterNumber(doc);
-                text.setText(chapter);
-                File out1 = new File(HasPath + '\\' + chapter + ".jpg");
-                BufferedImage mangaImage = jsoupParsURLWorker(doc);
-                if(mangaImage != null) {
-                    ImageIO.write(jsoupParsURLWorker(doc), "jpg", out1);
-                }
-                doc = responseGet((Title + (doc.select("a[class=btn next_page]").attr("abs:href")))).parse();
+                // System.out.println("href" + href);
             }
+
+//            while ((conti.select("a").attr("abs:href").length() > 1) &&
+//                    (!(conti.select("a").attr("abs:href").equals("javascript:void(0);")))) {
+//                String Title = conti.select("a[class=r]").attr("abs:href");
+//              /*  if(!(Title.toLowerCase().contains("https:") ||
+//                        Title.toLowerCase().contains("www."))){
+//                    Title = "https:" + Title; // www. ?
+//                }
+//                */
+//             //   Title = "http://www." + Title.substring(2);
+//                System.out.println("Title" + Title);
+//                Churllist.add(Title + (conti.select(  "a").attr("abs:href")));
+//                String chapter = chapterNumber(doc);
+//                text.setText(chapter);
+//                File out1 = new File(HasPath + '\\' + chapter + ".jpg");
+//                BufferedImage mangaImage = jsoupParsURLWorker(doc);
+//                if(mangaImage != null) {
+//                    ImageIO.write(jsoupParsURLWorker(doc), "jpg", out1);
+//                }
+//                doc = responseGet((Title + (doc.select("a[class=btn next_page]").attr("abs:href")))).parse();
+//            }
 
         }
         return Churllist;

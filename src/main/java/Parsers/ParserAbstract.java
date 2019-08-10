@@ -21,8 +21,7 @@ public abstract class ParserAbstract { // класс для парсеров
     protected String end;
     protected Text actiontarget;
     protected ParsersManager parsersManager;
-    protected String  UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) " +
-            "Chrome/33.0.1750.152 Safari/537.36";
+    protected String  UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36";
     ParserAbstract(){
     }
     public void trustManager(){
@@ -94,11 +93,13 @@ public abstract class ParserAbstract { // класс для парсеров
                 || el.text().toLowerCase().contains("afterword"));
     }
     public abstract void runParser();
+
     public abstract String runAsSubParser(String url) ;
 
     public void setUrl(String url){
         this.url = url;
     }
+
     public void setPath(String path) {
         this.path = path;
     }
@@ -114,6 +115,7 @@ public abstract class ParserAbstract { // класс для парсеров
     public void setParsersManager(ParsersManager parsersManager) {
         this.parsersManager = parsersManager;
     }
+
     public void setActiontarget(Text actiontarget) {
         this.actiontarget = actiontarget;
     }
@@ -140,6 +142,7 @@ public abstract class ParserAbstract { // класс для парсеров
         Thread.sleep(2000);
         out.close();
     }
+
     protected ArrayList<String>  linkWriteToArray(Document doc){
         ArrayList<String> linkHref = new ArrayList<String>();
         Elements ele = doc.getElementsByTag("a");

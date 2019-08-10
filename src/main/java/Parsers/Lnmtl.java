@@ -55,7 +55,7 @@ public class Lnmtl extends ParserAbstract {
 
 
 
-    private  String jsoupParsURLWorker(String url) throws IOException {
+    private String jsoupParsURLWorker(String url) throws IOException {
         String text = "";
         try {
             Connection.Response response;
@@ -78,15 +78,10 @@ public class Lnmtl extends ParserAbstract {
         catch (IllegalArgumentException e){
             System.out.println(e);
             System.out.println( "IllegalArgumentException " + url);
-
-
         }
         catch (HttpStatusException e){
             System.out.println(e);
             System.out.println("HttpStatusException" + url);
-
-
-
         }
 
         catch (SocketTimeoutException e){
@@ -98,9 +93,7 @@ public class Lnmtl extends ParserAbstract {
         return text;
     }
 
-
-
-    private   boolean nextChapterFinder(Document doc){
+    private boolean nextChapterFinder(Document doc){
         Elements content = doc.getElementsByTag("a");
         for(Element cl:content){
             if(cl.text().equals(next)){
@@ -120,7 +113,7 @@ public class Lnmtl extends ParserAbstract {
         }
         return linkHref.get(0) ;
     }
-    protected  ArrayList<String> jsoupParsListofUrls(String  url) throws IOException  {
+    protected ArrayList<String> jsoupParsListofUrls(String  url) throws IOException  {
         ArrayList<String> chArray = new ArrayList<String>();
         try {
             boolean nextChapter = true;

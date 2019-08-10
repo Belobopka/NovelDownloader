@@ -94,8 +94,6 @@ public class Main extends Application {
                         System.out.println( threadArray.get(threadArray.size() - 1).getState());
                     } else {
                         threadArray.get(threadArray.size() - 1).interrupt();
-
-
                         threadArray.remove(threadArray.size() - 1);
                         threadArray.add(new Thread(r));
                         threadArray.get(threadArray.size() - 1).setDaemon(true);
@@ -134,7 +132,8 @@ public class Main extends Application {
         public void run() {
             parsersManager = new ParsersManager(labelURLTextField.getText(),
                     labelFirstCnTextField.getText(),
-                    labelLastCnTextField.getText(),actionTarget,labelDownPathTextField.getText());
+                    labelLastCnTextField.getText(),actionTarget,labelDownPathTextField.getText()
+            );
             parsersManager.runAsMain();
 
         }

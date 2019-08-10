@@ -53,20 +53,24 @@ public class Wuxia extends ParserAbstract {
     }
 
     protected   ArrayList<String> jsoupParsListofUrls(String url) throws java.io.IOException {
-        Document doc = Jsoup.connect(url).userAgent(UserAgent)
+        Document doc = Jsoup.connect(url).userAgent(UserAgent).followRedirects(true).timeout(100000)
                 .get();
-        Elements content = doc.getElementsByClass("entry-content");
+        Elements content = doc.getElementsByClass("chapter-item");
         ArrayList<String> linkHref = new ArrayList<String>();
         for (Element link : content) {
-            Elements ele = link.getElementsByTag("a");
+            Elements ele = link.getElementsByTag("li");
             for (Element el : ele) {
-                if(ifPrChEp(el) || ifPrChEpText(el)) {
-                    linkHref.add(el.attr("href"));
+                Elements ee = el.getElementsByTag("a");
+                for (Element eleLink : ee) {
+                    if(ifPrChEp(eleLink) || ifPrChEpText(eleLink)) {
+                        linkHref.add(eleLink.attr("abs:href"));
+                    }
                 }
             }
         }
         countch = linkHref.size();
-        System.out.print(countch);
+        System.out.println("Count Ch " + countch);
+
         return linkHref;
     }
     private  void jsoupParsURLPerCh(String url,String chapter,String path) throws IOException {
@@ -98,8 +102,10 @@ public class Wuxia extends ParserAbstract {
                     System.out.println("Text");
                     break;
             }
-            Document doc = Jsoup.parse(response.parse().toString().replaceAll("</p>", "<p>"));
-            Elements content = doc.getElementsByClass("entry-content");
+            // Document doc = Jsoup.parse(response.parse().toString().replaceAll("</p>", "<p>"));
+            Document doc = Jsoup.parse(response.parse().toString());
+            Elements content = doc.getElementsByClass("fr-view");
+
             for (Element word : content) {
                 Elements elem = word.getElementsByTag("p");
                 stringBuilder.append(toStringWriter(elem));

@@ -9,8 +9,5 @@
         <module name="NovelReader" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="NovelReader" target="1.5" />
-    </bytecodeTargetLevel>
   </component>
 </project>
